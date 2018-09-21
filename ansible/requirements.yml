@@ -2,3 +2,6 @@
 
 - name: packages
   src: https://github.com/ministryofjustice/hmpps-ansible-packages.git
+- name: weblogic
+  src: https://github.com/ministryofjustice/hmpps-delius-core-weblogic-installer.git
+  version: createAnsibleRole
