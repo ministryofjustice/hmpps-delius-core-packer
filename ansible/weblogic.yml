@@ -3,4 +3,3 @@
 - hosts: localhost
   roles:
     - packages
-    - alfresco
