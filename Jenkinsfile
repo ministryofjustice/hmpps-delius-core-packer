@@ -36,13 +36,13 @@ pipeline {
             }
         }
 
-        stage('Verify Alfresco AMIS') {
+        stage('Verify Delius-Core AMIS') {
             parallel {
                 stage('Verify Delius-Core Weblogic') { steps { script {verify_image('weblogic.json')}}}
             }
         }
 
-        stage('Build Alfresco AMIS') {
+        stage('Build Delius-Core AMIS') {
             parallel {
                 stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
             }
