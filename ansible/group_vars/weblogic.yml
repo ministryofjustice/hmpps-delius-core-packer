@@ -1,0 +1,31 @@
+---
+
+system:
+  packages:
+    - deltarpm
+    - dpkg
+    - cairo
+    - cairo-devel
+    - cups
+    - cups-devel
+    - cups-libs
+    - fontconfig
+    - tomcat
+    - libICE
+    - libSM
+    - libXext
+    - libXinerama
+    - libXrender
+    - libGLU
+    - mesa-libGLU
+    - patch
+    - rsync
+    - rsyslog
+    - wget
+    - ImageMagick
+    - vim
+    - curl
+    - ghostscript
+    - unzip
+
+install_jdk: true
