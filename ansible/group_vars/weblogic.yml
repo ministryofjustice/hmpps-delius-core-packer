@@ -1,0 +1,10 @@
+---
+
+system:
+  packages:
+    - deltarpm
+    - dpkg
+    - tree
+
+install_jdk: true
+java_version: 7u181
