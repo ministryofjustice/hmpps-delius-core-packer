@@ -5,6 +5,7 @@ system:
     - deltarpm
     - dpkg
     - tree
+    - unzip
 
 install_jdk: true
 java_version: 7u181
