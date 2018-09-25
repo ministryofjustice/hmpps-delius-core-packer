@@ -3,7 +3,8 @@
     "packer_profile": "packer",
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env": "{{env `TARGET_ENV`}}",
-    "bucket": "{{env `ARTIFACT_BUCKET`}}"
+    "bucket": "{{env `ARTIFACT_BUCKET`}}",
+    "wl_bucket": "{{env `ZAIZI_BUCKET` }}"
   },
   "provisioners": [
     {
@@ -15,7 +16,8 @@
       "playbook_file": "./ansible/weblogic.yml",
       "extra_arguments": [
         "-b",
-        "-e artifact_bucket={{user `bucket`}}"
+        "-e artifact_bucket={{user `bucket`}}",
+        "-e wl_artefact_bucket={{user `wl_bucket`}}"
       ],
       "galaxy_file": "./ansible/requirements.yml",
       "inventory_groups": "weblogic",
@@ -37,7 +39,7 @@
         "owners": ["895523100917"],
         "most_recent": true
       },
-      "instance_type": "t2.micro",
+      "instance_type": "t2.medium",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
       "ami_users": [
