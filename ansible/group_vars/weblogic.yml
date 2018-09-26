@@ -34,7 +34,7 @@ system_users:
 mount_owner: "{{ system_users.0.name }}"
 mount_group: "{{ system_users.0.group }}"
 
-artefact_path: "oracle/wls"
+artefact_path: "delius-core/oracle/wls"
 weblogic_artefacts:
   - name: 'wls1036_generic.jar'
   - name: 'p27395085_1036_Generic.zip'
