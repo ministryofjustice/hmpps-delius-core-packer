@@ -171,3 +171,5 @@ oracledb_artefacts:
   - name: 'p13390677_112040_Linux-x86-64_6of7.zip'
   - name: 'p13390677_112040_Linux-x86-64_7of7.zip'
 
+oracledb_patches:
+  - name: 'p18370031_112040_Linux-x86-64.zip'
