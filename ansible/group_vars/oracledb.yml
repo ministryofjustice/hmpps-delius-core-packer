@@ -2,56 +2,57 @@
 
 system:
   packages:
-    - deltarpm
-    - dpkg
-    - tree
-    - unzip
-    - net-tools
-    - perl-URI
+    - bc
     - binutils
+    - compat-libcap1
     - compat-libstdc++-33
     - compat-libstdc++-33.i686
+    - deltarpm
+    - dpkg
+    - elfutils-libelf-devel
+    - fonts-*
     - gcc
     - gcc-c++
     - glibc
-    - glibc.i686
     - glibc-devel
     - glibc-devel.i686
+    - glibc.i686
     - ksh
+    - libaio
+    - libaio-devel
+    - libaio-devel.i686
+    - libaio.i686
     - libgcc
     - libgcc.i686
     - libstdc++
-    - libstdc++.i686
     - libstdc++-devel
     - libstdc++-devel.i686
-    - libaio
-    - libaio.i686
-    - libaio-devel
-    - libaio-devel.i686
-    - libXext
-    - libXext.i686
-    - libXtst
-    - libXtst.i686
+    - libstdc++.i686
     - libX11
     - libX11.i686
     - libXau
     - libXau.i686
     - libxcb
     - libxcb.i686
+    - libXext
+    - libXext.i686
     - libXi
     - libXi.i686
+    - libXtst
+    - libXtst.i686
     - make
+    - net-tools
+    - perl-URI
     - sysstat
+    - tree
     - unixODBC
     - unixODBC-devel
     - unzip
-    - zlib-devel
-    - elfutils-libelf-devel
-    - xorg-x11-xinit
     - xorg-x11-apps
     - xorg-x11-utils
-    - fonts-*
-    - bc
+    - xorg-x11-xinit
+    - zlib-devel
+
 
 install_jdk: false
 
@@ -67,6 +68,7 @@ system_users:
   - name: oracle
     uid: 1200
     group: oinstall
+    groups: "oinstall, dba, oper"
     gid: 54321
     profile: |
       alias ll='ls -lah'
@@ -100,19 +102,8 @@ database_characterset: "AL32UTF8"
 database_global_database_name: "dnda"
 database_sid: "dnda"
 database_memorylimit: "1000"
-database_password_all: "{{ secrets[role_creds_path + 'database_password_all'] }}"
 
-# installation variables
-oracle_database_version: 11g # supported versions: [11g]
-oracle_database_edition: EE # supported editions: [SE,EE]
-
-database_selected_languages: "en,en_GB"
-database_characterset: "AL32UTF8"
-database_global_database_name: "dnda"
-database_sid: "dnda"
-database_memorylimit: "1000"
-database_password_all: "{{ secrets[role_creds_path + 'database_password_all'] }}"
-
+# installation variable
 # mount-volume
 mount_point: '/u01'
 # installers
@@ -132,19 +123,3 @@ oracle_database_datalocation: "{{ oracle_database_oracle_base }}/oradata"
 oracle_grid_oracle_base: "{{ mount_point }}/app/grid"
 oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/11.2.0.4/grid"
 
-# installers
-oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
-oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
-oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
-oracle_database_response_file: "db-install-11g"
-oracle_grid_response_file: "grid-install-11g"
-oracle_asm_response_file: "grid-config-asm"
-oracle_dbca_response_file: "dbca-install"
-
-# oracle-database
-oracle_database_inventory_location: "{{ mount_point }}/app/oraInventory"
-oracle_database_oracle_base: "{{ mount_point }}/app/oracle"
-oracle_database_oracle_home: "{{ oracle_database_oracle_base }}/product/11.2.0.4/db"
-oracle_database_datalocation: "{{ oracle_database_oracle_base }}/oradata"
-oracle_grid_oracle_base: "{{ mount_point }}/app/grid"
-oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/11.2.0.4/grid"
