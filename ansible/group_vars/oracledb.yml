@@ -54,3 +54,97 @@ system:
     - bc
 
 install_jdk: false
+
+system_groups:
+  - group: "{{ system_users.0.group }}"
+    gid: "{{ system_users.0.gid }}"
+  - group: dba
+    gid: 54322
+  - group: oper
+    gid: 54323
+
+system_users:
+  - name: oracle
+    uid: 1200
+    group: oinstall
+    gid: 54321
+    profile: |
+      alias ll='ls -lah'
+      alias cp='cp -iv'
+      export ORACLE_TERM=xterm
+      export PATH=/usr/sbin:/usr/local/bin:$PATH
+      export PATH=$ORACLE_HOME/bin:$PATH
+      export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+      export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+
+      if [ $USER = "oracle" ]; then
+        if [ $SHELL = "/bin/ksh" ]; then
+          ulimit -p 16384
+          ulimit -n 65536
+        else
+          ulimit -u 16384 -n 65536
+        fi
+      fi
+
+
+mount_point: "{{ alternate_mount_point|default('/u01') }}"
+mount_owner: "{{ system_users.0.name }}"
+mount_group: "{{ system_users.0.group }}"
+
+# installation variables
+oracle_database_version: 11g # supported versions: [11g]
+oracle_database_edition: EE # supported editions: [SE,EE]
+
+database_selected_languages: "en,en_GB"
+database_characterset: "AL32UTF8"
+database_global_database_name: "dnda"
+database_sid: "dnda"
+database_memorylimit: "1000"
+database_password_all: "{{ secrets[role_creds_path + 'database_password_all'] }}"
+
+# installation variables
+oracle_database_version: 11g # supported versions: [11g]
+oracle_database_edition: EE # supported editions: [SE,EE]
+
+database_selected_languages: "en,en_GB"
+database_characterset: "AL32UTF8"
+database_global_database_name: "dnda"
+database_sid: "dnda"
+database_memorylimit: "1000"
+database_password_all: "{{ secrets[role_creds_path + 'database_password_all'] }}"
+
+# mount-volume
+mount_point: '/u01'
+# installers
+oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
+oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
+oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
+oracle_database_response_file: "db-install-11g"
+oracle_grid_response_file: "grid-install-11g"
+oracle_asm_response_file: "grid-config-asm"
+oracle_dbca_response_file: "dbca-install"
+
+# oracle-database
+oracle_database_inventory_location: "{{ mount_point }}/app/oraInventory"
+oracle_database_oracle_base: "{{ mount_point }}/app/oracle"
+oracle_database_oracle_home: "{{ oracle_database_oracle_base }}/product/11.2.0.4/db"
+oracle_database_datalocation: "{{ oracle_database_oracle_base }}/oradata"
+oracle_grid_oracle_base: "{{ mount_point }}/app/grid"
+oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/11.2.0.4/grid"
+
+# installers
+oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
+oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
+oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
+oracle_database_response_file: "db-install-11g"
+oracle_grid_response_file: "grid-install-11g"
+oracle_asm_response_file: "grid-config-asm"
+oracle_dbca_response_file: "dbca-install"
+
+# oracle-database
+oracle_database_inventory_location: "{{ mount_point }}/app/oraInventory"
+oracle_database_oracle_base: "{{ mount_point }}/app/oracle"
+oracle_database_oracle_home: "{{ oracle_database_oracle_base }}/product/11.2.0.4/db"
+oracle_database_datalocation: "{{ oracle_database_oracle_base }}/oradata"
+oracle_grid_oracle_base: "{{ mount_point }}/app/grid"
+oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/11.2.0.4/grid"
