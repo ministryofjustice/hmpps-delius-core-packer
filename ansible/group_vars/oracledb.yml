@@ -159,3 +159,15 @@ oracle_database_limits_hard_stack: 32768
 # mem lock 90% of RAM
 oracle_database_limits_soft_memlock: 1887437
 oracle_database_limits_hard_memlock: 1887437
+
+
+artefact_path: "delius-core/oracle/rdbms"
+oracledb_artefacts:
+  - name: 'p13390677_112040_Linux-x86-64_1of7.zip'
+  - name: 'p13390677_112040_Linux-x86-64_2of7.zip'
+  - name: 'p13390677_112040_Linux-x86-64_3of7.zip'
+  - name: 'p13390677_112040_Linux-x86-64_4of7.zip'
+  - name: 'p13390677_112040_Linux-x86-64_5of7.zip'
+  - name: 'p13390677_112040_Linux-x86-64_6of7.zip'
+  - name: 'p13390677_112040_Linux-x86-64_7of7.zip'
+
