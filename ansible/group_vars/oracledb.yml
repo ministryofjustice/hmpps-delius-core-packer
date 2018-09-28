@@ -48,11 +48,11 @@ system:
     - unixODBC
     - unixODBC-devel
     - unzip
+    - vim
     - xorg-x11-apps
     - xorg-x11-utils
     - xorg-x11-xinit
     - zlib-devel
-
 
 install_jdk: false
 
