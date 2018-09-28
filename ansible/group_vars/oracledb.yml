@@ -89,7 +89,7 @@ system_users:
       fi
 
 
-mount_point: "u01"
+mount_point: "/u01"
 mount_owner: "{{ system_users.0.name }}"
 mount_group: "{{ system_users.0.group }}"
 
