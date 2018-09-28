@@ -17,6 +17,7 @@ system:
     - glibc-devel
     - glibc-devel.i686
     - glibc.i686
+    - kmod-oracleasm
     - ksh
     - libaio
     - libaio-devel
@@ -166,10 +167,10 @@ oracledb_artefacts:
   - name: 'p13390677_112040_Linux-x86-64_1of7.zip'
   - name: 'p13390677_112040_Linux-x86-64_2of7.zip'
   - name: 'p13390677_112040_Linux-x86-64_3of7.zip'
-  - name: 'p13390677_112040_Linux-x86-64_4of7.zip'
-  - name: 'p13390677_112040_Linux-x86-64_5of7.zip'
-  - name: 'p13390677_112040_Linux-x86-64_6of7.zip'
-  - name: 'p13390677_112040_Linux-x86-64_7of7.zip'
 
 oracledb_patches:
   - name: 'p18370031_112040_Linux-x86-64.zip'
+
+oracledb_rpms:
+  - name: 'oracleasm-support-2.1.11-2.el7.x86_64.rpm'
+  - name: 'oracleasmlib-2.0.12-1.el7.x86_64.rpm'
