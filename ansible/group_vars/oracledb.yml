@@ -90,6 +90,7 @@ system_users:
 
 
 mount_point: "/u01"
+device_name: "/dev/xvdb"
 mount_owner: "{{ system_users.0.name }}"
 mount_group: "{{ system_users.0.group }}"
 
@@ -108,7 +109,7 @@ oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
 oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
 oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
 oracle_database_response_file: "db-install-11g"
-oracle_grid_response_file: "grid-install-11g"
+oracle_grid_response_file: "grid"
 oracle_asm_response_file: "grid-config-asm"
 oracle_dbca_response_file: "dbca-install"
 
