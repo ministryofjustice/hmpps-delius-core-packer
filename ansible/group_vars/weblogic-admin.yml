@@ -1,0 +1,13 @@
+---
+
+admin_templates:
+  - src: 'domain.properties.j2'
+    dest: 'domain.properties'
+    mode: '0644'
+    owner: "oracle"
+    group: "oinstall"
+  - src: 'create_domain.py'
+    dest: 'create_domain.py'
+    mode: '0755'
+    owner: "oracle"
+    group: "oinstall"
