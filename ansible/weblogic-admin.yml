@@ -4,7 +4,7 @@
   tasks:
   - name: Copy create domain properties and script
     template:
-      src: "{{ role_path }}/templates/{{ item.src }}"
+      src: "{{ playbook_dir }}/templates/{{ item.src }}"
       dest: "/u01/software/{{ item.dest }}"
       mode: "{{ item.mode|default('0644') }}"
       owner: "{{ item.owner|default('oracle') }}"
