@@ -6,4 +6,3 @@
   src: https://github.com/ministryofjustice/hmpps-delius-core-system-user.git
 - name: oracledb
   src: https://github.com/ministryofjustice/hmpps-delius-core-oracledb-installer.git
-  version: createOracleDBInstaller
