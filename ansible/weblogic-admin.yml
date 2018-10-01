@@ -10,6 +10,7 @@
       owner: "{{ item.owner|default('oracle') }}"
       group: "{{ item.group|default('oinstall') }}"
     with_items: "{{ admin_templates }}"
+    remote_src: true
 
   - name: Execute domain configuration
     shell: '. ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && java weblogic.WLST /u01/software/create_domain.py'
