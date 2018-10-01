@@ -26,7 +26,7 @@
         "filters": {
           "virtualization-type": "hvm",
           "architecture": "x86_64",
-          "name": "HMPPS Base  Weblogic {{user `branch_name`}} *",
+          "name": "HMPPS Delius-Core Weblogic {{user `branch_name`}} *",
           "root-device-type": "ebs"
         },
         "owners": ["895523100917"],

@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-        stage('Verify Delius-Core AMIS') {
+        /*stage('Verify Delius-Core AMIS') {
             parallel {
                 stage('Verify Delius-Core Weblogic') { steps { script {verify_image('weblogic.json')}}}
                 stage('Verify Delius-Core OracleDB') { steps { script {verify_image('oracledb.json')}}}
@@ -50,7 +50,7 @@ pipeline {
                 stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
                 stage('Build Delius-Core Oracle DB') { steps { script {build_image('oracledb.json')}}}
             }
-        }
+        }*/
 
         stage('Verify Weblogic AMIS') {
             parallel {
