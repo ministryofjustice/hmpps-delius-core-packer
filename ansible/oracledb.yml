@@ -1,0 +1,7 @@
+---
+
+- hosts: localhost
+  roles:
+    - packages
+    - system_users
+    - oracledb
