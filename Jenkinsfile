@@ -51,6 +51,18 @@ pipeline {
                 stage('Build Delius-Core Oracle DB') { steps { script {build_image('oracledb.json')}}}
             }
         }
+
+        stage('Verify Weblogic AMIS') {
+            parallel {
+                stage('Verify Delius-Core Weblogic Admin') { steps { script {verify_image('weblogic-admin.json')}}}
+            }
+        }
+
+        stage('Build Weblogic AMIS') {
+            parallel {
+                stage('Build Delius-Core Weblogic Admin') { steps { script {build_image('weblogic-admin.json')}}}
+            }
+        }
     }
 
     post {

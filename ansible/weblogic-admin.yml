@@ -1,0 +1,26 @@
+---
+
+- hosts: localhost
+  tasks:
+    - name: Copy create domain properties and script
+      template:
+        src: "/tmp/templates/{{ item.src }}"
+        dest: "/u01/software/{{ item.dest }}"
+        mode: "{{ item.mode|default('0644') }}"
+        owner: "{{ item.owner|default('oracle') }}"
+        group: "{{ item.group|default('oinstall') }}"
+      with_items: "{{ admin_templates }}"
+
+    - name: Execute domain configuration
+      shell: '. ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && java weblogic.WLST /u01/software/create_domain.py'
+      become: yes
+      become_user: "oracle"
+      register: create_domain
+
+  post_tasks:
+    - name: Clean Up
+      file:
+        state: absent
+        path: "{{ item }}"
+      with_items:
+        - "/tmp/templates"
