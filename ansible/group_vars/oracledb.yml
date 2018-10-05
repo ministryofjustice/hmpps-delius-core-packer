@@ -176,7 +176,13 @@ oracledb_artefacts:
 
 oracledb_patches:
   - name: 'p18370031_112040_Linux-x86-64.zip'
+  - name: 'p6880880_112000_Linux-x86-64.zip'
+    dest: "{{ oracle_patch_installer_directory }}"
+  - name: 'p27726505_112040_Linux-x86-64.zip'
+    dest: "{{ oracle_patch_installer_directory }}"
 
 oracledb_rpms:
   - name: 'oracleasm-support-2.1.11-2.el7.x86_64.rpm'
   - name: 'oracleasmlib-2.0.12-1.el7.x86_64.rpm'
+
+artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + ['p18370031_112040_Linux-x86-64.zip'] }}"
