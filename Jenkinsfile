@@ -40,19 +40,19 @@ pipeline {
 
         stage('Verify Delius-Core AMIS') {
             parallel {
-                //stage('Verify Delius-Core Weblogic') { steps { script {verify_image('weblogic.json')}}}
+                stage('Verify Delius-Core Weblogic') { steps { script {verify_image('weblogic.json')}}}
                 stage('Verify Delius-Core OracleDB') { steps { script {verify_image('oracledb.json')}}}
             }
         }
 
         stage('Build Delius-Core AMIS') {
             parallel {
-                //stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
+                stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
                 stage('Build Delius-Core Oracle DB') { steps { script {build_image('oracledb.json')}}}
             }
         }
 
-        /*stage('Verify Weblogic AMIS') {
+        stage('Verify Weblogic AMIS') {
             parallel {
                 stage('Verify Delius-Core Weblogic Admin') { steps { script {verify_image('weblogic-admin.json')}}}
             }
@@ -62,7 +62,7 @@ pipeline {
             parallel {
                 stage('Build Delius-Core Weblogic Admin') { steps { script {build_image('weblogic-admin.json')}}}
             }
-        }*/
+        }
     }
 
     post {
