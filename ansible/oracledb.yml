@@ -1,6 +1,10 @@
 ---
 
 - hosts: localhost
+  pre_tasks:
+    - name: Dump out some vars
+      debug:
+        msg: "{{ artifacts_to_clean|default([])}}"
   roles:
     - packages
     - system_users
