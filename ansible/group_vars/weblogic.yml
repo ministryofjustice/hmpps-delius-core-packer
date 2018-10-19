@@ -33,10 +33,6 @@ system_users:
           PATH=$JAVA_HOME/bin:$PATH
           export PATH
 
-
-mount_owner: "{{ system_users.0.name }}"
-mount_group: "{{ system_users.0.group }}"
-
 artefact_path: "delius-core/oracle/wls"
 weblogic_artefacts:
   - name: 'wls1036_generic.jar'
