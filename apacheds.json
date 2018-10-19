@@ -1,0 +1,67 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "env": "{{env `TARGET_ENV`}}",
+    "bucket": "{{env `ARTIFACT_BUCKET`}}",
+    "apacheds_bucket": "{{env `ZAIZI_BUCKET`}}"
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "scripts/base.sh"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/apacheds.yml",
+      "extra_arguments": [
+        "-b",
+        "-e artifact_bucket={{user `bucket`}}",
+        "-e apacheds_artifact_bucket={{user `apacheds_bucket`}}"
+      ],
+      "galaxy_file": "./ansible/apacheds-reqs.yml",
+      "inventory_groups": "apacheds",
+      "group_vars": "./ansible/group_vars"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env`}}-jenkins-ec2-slave-role-instance-profile",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Base CentOS master *",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ami_regions": ["eu-west-2"],
+      "ssh_username": "centos",
+      "ami_users": [
+          "895523100917",
+          "723123699647",
+          "728765553488",
+          "130975965028"
+      ],
+      "ami_name": "HMPPS Delius-Core ApacheDS {{user `branch_name`}} {{timestamp}}",
+      "ssh_interface": "private_ip",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "ami_block_device_mappings": [
+        {
+          "device_name": "/dev/xvdb",
+          "volume_type": "gp2",
+          "volume_size": "50",
+          "delete_on_termination": true,
+          "encrypted": true
+        }
+      ]
+    }
+  ]
+}
