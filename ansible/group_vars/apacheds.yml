@@ -12,7 +12,7 @@ install_jdk: true
 java_version: 8u181
 
 artefact_path: "delius-core/apache/apacheds"
-apacheds_artefacts:
+#apacheds_artefacts:
 
 apacheds_rpms:
   - name: 'apacheds-2.0.0.AM25-x86_64.rpm'
