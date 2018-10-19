@@ -1,0 +1,12 @@
+---
+
+system:
+  packages:
+    - deltarpm
+    - dpkg
+    - tomcat
+    - tree
+    - unzip
+
+install_jdk: true
+java_version: 8u181
