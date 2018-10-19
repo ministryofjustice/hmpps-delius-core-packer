@@ -19,7 +19,7 @@
         "-e artifact_bucket={{user `bucket`}}",
         "-e apacheds_artifact_bucket={{user `apacheds_bucket`}}"
       ],
-      "galaxy_file": "./ansible/apacheds-reqs.yml",
+      "galaxy_file": "./ansible/apacheds-requirements.yml",
       "inventory_groups": "apacheds",
       "group_vars": "./ansible/group_vars"
     }
