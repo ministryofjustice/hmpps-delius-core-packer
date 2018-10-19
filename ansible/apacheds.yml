@@ -3,5 +3,4 @@
 - hosts: localhost
   roles:
     - packages
-    # - system_users
-    # - apacheds
+    - apacheds
