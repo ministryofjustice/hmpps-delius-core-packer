@@ -19,7 +19,7 @@
         "-e artifact_bucket={{user `bucket`}}",
         "-e wl_artefact_bucket={{user `wl_bucket`}}"
       ],
-      "galaxy_file": "./ansible/odb-requirements.yml",
+      "galaxy_file": "./ansible/oracledb-requirements.yml",
       "inventory_groups": "oracledb",
       "group_vars": "./ansible/group_vars"
     }

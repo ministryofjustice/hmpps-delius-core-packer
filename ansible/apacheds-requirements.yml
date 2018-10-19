@@ -1,0 +1,8 @@
+---
+
+- name: packages
+  src: https://github.com/ministryofjustice/hmpps-ansible-packages.git
+# - name: system_users
+#   src: https://github.com/ministryofjustice/hmpps-delius-core-system-user.git
+# - name: apacheds
+#   src: https://github.com/ministryofjustice/hmpps-delius-core-apacheds-installer.git

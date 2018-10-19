@@ -19,7 +19,7 @@
         "-e artifact_bucket={{user `bucket`}}",
         "-e wl_artefact_bucket={{user `wl_bucket`}}"
       ],
-      "galaxy_file": "./ansible/requirements.yml",
+      "galaxy_file": "./ansible/weblogic-requirements.yml",
       "inventory_groups": "weblogic",
       "group_vars": "./ansible/group_vars"
     }
