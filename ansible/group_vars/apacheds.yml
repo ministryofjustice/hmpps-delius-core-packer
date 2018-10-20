@@ -11,7 +11,7 @@ system:
 install_jdk: true
 java_version: 8u181
 
-artefact_path: "delius-core/apache/apacheds"
+artefact_path: "delius-core/apache"
 #apacheds_artefacts:
 
 apacheds_rpms:
