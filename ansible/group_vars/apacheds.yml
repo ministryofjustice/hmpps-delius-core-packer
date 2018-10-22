@@ -1,0 +1,17 @@
+---
+
+system:
+  packages:
+    - deltarpm
+    - dpkg
+    - openldap-clients
+    - tree
+    - unzip
+
+install_jdk: true
+java_version: 8u181
+
+artefact_path: "delius-core/apache"
+
+apacheds_rpms:
+  - name: 'apacheds-2.0.0.AM25-x86_64.rpm'

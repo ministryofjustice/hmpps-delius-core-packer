@@ -9,7 +9,7 @@ def verify_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer validate ''' + filename + "'"
+        bash -c 'USER=`whoami` packer validate ''' + filename + "'"
     }
 }
 
@@ -24,7 +24,7 @@ def build_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'ansible-galaxy install -r ansible/requirements.yml; USER=`whoami` packer build ''' + filename + "'"
+        bash -c 'USER=`whoami` packer build ''' + filename + "'"
     }
 }
 
@@ -42,13 +42,15 @@ pipeline {
             parallel {
                 stage('Verify Delius-Core Weblogic') { steps { script {verify_image('weblogic.json')}}}
                 stage('Verify Delius-Core OracleDB') { steps { script {verify_image('oracledb.json')}}}
+                stage('Verify Delius-Core ApacheDS') { steps { script {verify_image('apacheds.json')}}}
             }
         }
 
         stage('Build Delius-Core AMIS') {
             parallel {
                 stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
-                stage('Build Delius-Core Oracle DB') { steps { script {build_image('oracledb.json')}}}
+                stage('Build Delius-Core OracleDB') { steps { script {build_image('oracledb.json')}}}
+                stage('Verify Delius-Core ApacheDS') { steps { script {build_image('apacheds.json')}}}
             }
         }
 
