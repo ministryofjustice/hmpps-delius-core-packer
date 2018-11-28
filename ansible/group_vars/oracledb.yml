@@ -176,6 +176,7 @@ oracledb_artefacts:
 
 oracledb_patches:
   - name: 'p18370031_112040_Linux-x86-64.zip'
+    dest_path: "{{ oracle_patch_installer_directory }}"
   - name: 'p27726505_112040_Linux-x86-64.zip'
     dest_path: "{{ oracle_patch_installer_directory }}"
 
