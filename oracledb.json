@@ -17,8 +17,7 @@
       "extra_arguments": [
         "-b",
         "-e artifact_bucket={{user `bucket`}}",
-        "-e wl_artefact_bucket={{user `wl_bucket`}}",
-        "-vvv"
+        "-e wl_artefact_bucket={{user `wl_bucket`}}"
       ],
       "galaxy_file": "./ansible/oracledb-requirements.yml",
       "inventory_groups": "oracledb",
