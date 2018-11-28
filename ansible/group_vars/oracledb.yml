@@ -106,8 +106,8 @@ oracle_database_edition: EE # supported editions: [SE,EE]
 
 database_selected_languages: "en,en_GB"
 database_characterset: "AL32UTF8"
-database_global_database_name: "dnda"
-database_sid: "dnda"
+database_global_database_name: "TEST"
+database_sid: "TEST"
 database_memorylimit: "1000"
 
 # installers
