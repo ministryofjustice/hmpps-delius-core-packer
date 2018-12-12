@@ -50,7 +50,7 @@ pipeline {
             parallel {
                 stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
                 stage('Build Delius-Core OracleDB') { steps { script {build_image('oracledb.json')}}}
-                stage('Verify Delius-Core ApacheDS') { steps { script {build_image('apacheds.json')}}}
+                stage('Build Delius-Core ApacheDS') { steps { script {build_image('apacheds.json')}}}
             }
         }
 
