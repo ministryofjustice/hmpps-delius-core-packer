@@ -5,8 +5,8 @@ system:
     - deltarpm
     - dpkg
     - openldap-clients
-    - tree
-    - unzip
+    - tree # yum hmpps-base-packer/ansible/group_vars/centos7
+    - unzip # yum hmpps-base-packer/ansible/group_vars/centos7
 
 install_jdk: true
 java_version: 8u181

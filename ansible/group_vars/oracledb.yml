@@ -48,7 +48,7 @@ system:
     - unixODBC
     - unixODBC-devel
     - unzip
-    - vim
+    - vim # yum hmpps-base-packer/ansible/group_vars/centos7
     - xorg-x11-apps
     - xorg-x11-utils
     - xorg-x11-xinit
