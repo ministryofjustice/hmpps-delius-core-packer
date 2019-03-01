@@ -5,7 +5,6 @@ system:
     - deltarpm
     - dpkg
     - openldap-clients
-    - tree
     - unzip
 
 install_jdk: true

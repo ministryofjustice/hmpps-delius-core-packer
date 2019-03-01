@@ -4,7 +4,6 @@ system:
   packages:
     - deltarpm
     - dpkg
-    - tree
     - unzip
 
 install_jdk: true
