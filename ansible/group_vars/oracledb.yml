@@ -52,7 +52,8 @@ system:
     - xorg-x11-xinit
     - zlib-devel
 
-install_jdk: false
+install_jdk: true
+java_version: 7u181
 
 system_groups:
   - group: "{{ system_users.0.group }}"
@@ -61,6 +62,8 @@ system_groups:
     gid: 54322
   - group: oper
     gid: 54323
+
+java_home: "{{ lookup('env', 'JAVA_HOME') or '/usr/java/latest' }}"
 
 system_users:
   - name: oracle
@@ -80,6 +83,8 @@ system_users:
       export ORACLE_TERM=xterm
       export PATH=/usr/sbin:/usr/local/bin:$PATH
       export PATH=$ORACLE_HOME/bin:$PATH
+      export JAVA_HOME={{ java_home }}
+      export PATH=$JAVA_HOME/bin:$PATH
       export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
       export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 
