@@ -117,6 +117,7 @@ database_memorylimit: "1000"
 oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
 oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
 oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
+oracle_osbws_installer_directory: "{{ mount_point }}/software/11gR/osbws"
 oracle_database_response_file: "db"
 oracle_grid_response_file: "grid"
 oracle_asm_response_file: "grid-config-asm"
@@ -194,4 +195,4 @@ oracledb_rpms:
 oracledb_osbws:
   - name: 'osbws_install_12.2.0.1.0.jar'
 
-artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
+artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + oracledb_osbws + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
