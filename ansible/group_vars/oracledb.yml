@@ -52,7 +52,8 @@ system:
     - xorg-x11-xinit
     - zlib-devel
 
-install_jdk: false
+install_jdk: true
+java_version: 7u181
 
 system_groups:
   - group: "{{ system_users.0.group }}"
@@ -61,6 +62,8 @@ system_groups:
     gid: 54322
   - group: oper
     gid: 54323
+
+java_home: "{{ lookup('env', 'JAVA_HOME') or '/usr/java/latest' }}"
 
 system_users:
   - name: oracle
@@ -80,6 +83,8 @@ system_users:
       export ORACLE_TERM=xterm
       export PATH=/usr/sbin:/usr/local/bin:$PATH
       export PATH=$ORACLE_HOME/bin:$PATH
+      export JAVA_HOME={{ java_home }}
+      export PATH=$JAVA_HOME/bin:$PATH
       export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
       export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
 
@@ -112,6 +117,7 @@ database_memorylimit: "1000"
 oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
 oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
 oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
+oracle_osbws_installer_directory: "{{ mount_point }}/software/11gR/osbws"
 oracle_database_response_file: "db"
 oracle_grid_response_file: "grid"
 oracle_asm_response_file: "grid-config-asm"
@@ -186,4 +192,7 @@ oracledb_rpms:
   - name: 'oracleasm-support-2.1.11-2.el7.x86_64.rpm'
   - name: 'oracleasmlib-2.0.12-1.el7.x86_64.rpm'
 
-artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
+oracledb_osbws:
+  - name: 'osbws_install_12.2.0.1.0.jar'
+
+artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + oracledb_osbws + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
