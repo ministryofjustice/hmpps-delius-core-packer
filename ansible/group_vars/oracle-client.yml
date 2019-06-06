@@ -1,0 +1,58 @@
+---
+
+system:
+  packages:
+    - bc
+    - binutils
+    - compat-libcap1
+    - compat-libstdc++-33
+    - compat-libstdc++-33.i686
+    - dpkg
+    - elfutils-libelf-devel
+    - fonts-*
+    - gcc
+    - gcc-c++
+    - glibc
+    - glibc-devel
+    - glibc-devel.i686
+    - glibc.i686
+    - kmod-oracleasm
+    - ksh
+    - libaio
+    - libaio-devel
+    - libaio-devel.i686
+    - libaio.i686
+    - libgcc
+    - libgcc.i686
+    - libstdc++
+    - libstdc++-devel
+    - libstdc++-devel.i686
+    - libstdc++.i686
+    - libX11
+    - libX11.i686
+    - libXau
+    - libXau.i686
+    - libxcb
+    - libxcb.i686
+    - libXext
+    - libXext.i686
+    - libXi
+    - libXi.i686
+    - libXtst
+    - libXtst.i686
+    - make
+    - net-tools
+    - perl-URI
+    - sysstat
+    - unixODBC
+    - unixODBC-devel
+    - unzip
+    - xorg-x11-apps
+    - xorg-x11-utils
+    - xorg-x11-xinit
+    - zlib-devel
+
+artifact_path: "delius-core/oracle/client"
+artifacts:
+  - name: 'oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm'
+  - name: 'oracle-instantclient19.3-sqlplus-19.3.0.0.0-1.x86_64.rpm'

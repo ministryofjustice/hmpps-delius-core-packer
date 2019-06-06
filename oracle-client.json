@@ -1,0 +1,83 @@
+{
+  "variables": {
+    "packer_profile": "packer",
+    "branch_name": "{{env `BRANCH_NAME`}}",
+    "env": "{{env `TARGET_ENV`}}",
+    "bucket": "{{env `ARTIFACT_BUCKET`}}",
+    "wl_bucket": "{{env `ZAIZI_BUCKET` }}"
+  },
+  "provisioners": [
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/oracle-client.yml",
+      "extra_arguments": [
+        "-b",
+        "-e artifact_bucket={{user `bucket`}}"
+      ],
+      "galaxy_file": "./ansible/oracle-client-requirements.yml",
+      "inventory_groups": "oracle-client",
+      "group_vars": "./ansible/group_vars"
+    }
+  ],
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-2",
+      "iam_instance_profile": "tf-eu-west-2-hmpps-eng-{{user `env`}}-jenkins-ec2-slave-role-instance-profile",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "architecture": "x86_64",
+          "name": "HMPPS Base CentOS master *",
+          "root-device-type": "ebs"
+        },
+        "owners": ["895523100917"],
+        "most_recent": true
+      },
+      "instance_type": "t2.medium",
+      "ami_regions": ["eu-west-2"],
+      "ssh_username": "centos",
+      "ami_users": [
+        "895523100917",
+        "723123699647",
+        "728765553488",
+        "130975965028",
+        "205048117103",
+        "563502482979",
+        "010587221707",
+        "050243167760",
+        "716683748953",
+        "645753425509",
+        "330914586320",
+        "130847504577",
+        "077643444046",
+        "479759138745",
+        "349354156492",
+        "431912413968"
+      ],
+      "ami_name": "HMPPS Delius-Core Oracle Client {{user `branch_name`}} {{timestamp}}",
+      "ssh_interface": "private_ip",
+      "vpc_id": "vpc-02321f288159e5d0e",
+      "subnet_id": "subnet-00982fba28419ac5f",
+      "temporary_security_group_source_cidr": "10.0.0.0/8",
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_type": "io1",
+          "iops": 1000,
+          "volume_size": 50,
+          "delete_on_termination": true,
+          "encrypted": false
+        },
+        {
+          "device_name": "/dev/xvdb",
+          "volume_type": "io1",
+          "iops": 1000,
+          "volume_size": 256,
+          "delete_on_termination": true,
+          "encrypted": false
+        }
+      ]
+    }
+  ]
+}
