@@ -12,7 +12,8 @@
       "playbook_file": "./ansible/oracle-client.yml",
       "extra_arguments": [
         "-b",
-        "-e artifact_bucket={{user `wl_bucket`}}"
+        "-e artifact_bucket={{user `wl_bucket`}}",
+        "-e github_access_token={{user `github_access_token`}}"
       ],
       "galaxy_file": "./ansible/oracle-client-requirements.yml",
       "inventory_groups": "oracle-client",
