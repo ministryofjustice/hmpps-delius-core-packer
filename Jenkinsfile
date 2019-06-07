@@ -9,8 +9,9 @@ def verify_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'USER=`whoami` packer validate ''' + filename + " \
-        -var github_access_token=`aws ssm get-parameter --name '/jenkins/github/accesstoken' --with-decryption --region eu-west2`'"
+        bash -c 'USER=`whoami` packer validate \
+        -var github_access_token=`aws ssm get-parameter --name /jenkins/github/accesstoken --with-decryption --region eu-west-2` \
+        ''' + filename + "'"
     }
 }
 
@@ -25,8 +26,9 @@ def build_image(filename) {
         -e ZAIZI_BUCKET \
         -v `pwd`:/home/tools/data \
         mojdigitalstudio/hmpps-packer-builder \
-        bash -c 'USER=`whoami` packer build ''' + filename + " \
-        -var github_access_token=`aws ssm get-parameter --name '/jenkins/github/accesstoken' --with-decryption --region eu-west2`'"
+        bash -c 'USER=`whoami` packer build \
+        -var github_access_token=`aws ssm get-parameter --name /jenkins/github/accesstoken --with-decryption --region eu-west-2` \
+        ''' + filename + "'"
     }
 }
 
