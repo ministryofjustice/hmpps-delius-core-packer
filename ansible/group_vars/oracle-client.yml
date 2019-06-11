@@ -12,10 +12,12 @@ system:
     - fonts-*
     - gcc
     - gcc-c++
+    - git
     - glibc
     - glibc-devel
     - glibc-devel.i686
     - glibc.i686
+    - hub
     - kmod-oracleasm
     - ksh
     - libaio
@@ -41,6 +43,7 @@ system:
     - libXtst
     - libXtst.i686
     - make
+    - openldap-clients
     - net-tools
     - perl-URI
     - sysstat
