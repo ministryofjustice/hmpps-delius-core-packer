@@ -75,13 +75,13 @@ pipeline {
             }
         }
 
-        // stage('Build Delius-Core IAPS') { 
-        //     steps { 
-        //         script {
-        //             build_win_image('iaps.json')
-        //         }
-        //     }
-        // }
+        stage('Build Delius-Core IAPS') { 
+            steps { 
+                script {
+                    build_win_image('iaps.json')
+                }
+            }
+        }
     }
     post {
         always {
