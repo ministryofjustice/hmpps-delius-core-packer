@@ -40,22 +40,18 @@ pipeline {
     }
 
     stages {
-        stage('Verify Delius-Core AMIS') {
-            stage('Verify Delius-Core IAPS') { 
-                steps { 
-                    script {
-                        verify_image('iaps.json')
-                    }
+        stage('Verify Delius-Core IAPS') { 
+            steps { 
+                script {
+                    verify_image('iaps.json')
                 }
             }
         }
 
-        stage('Build Delius-Core AMIS') {
-            stage('Build Delius-Core IAPS') { 
-                steps { 
-                    script {
-                        build_image('iaps.json')
-                    }
+        stage('Build Delius-Core IAPS') { 
+            steps { 
+                script {
+                    build_image('iaps.json')
                 }
             }
         }
