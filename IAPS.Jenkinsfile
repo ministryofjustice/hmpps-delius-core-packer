@@ -32,6 +32,24 @@ def build_image(filename) {
     }
 }
 
+def build_win_image(filename) {
+    wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+        sh """
+        #!/usr/env/bin bash
+        set +x
+        docker run --rm \
+        -e BRANCH_NAME \
+        -e TARGET_ENV \
+        -e ARTIFACT_BUCKET \
+        -e ZAIZI_BUCKET \
+        -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
+        -e WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}" \
+        -v `pwd`:/home/tools/data \
+        mojdigitalstudio/hmpps-packer-builder \
+        bash -c 'USER=`whoami` packer build """ + filename + "'"
+    }
+}
+
 pipeline {
     agent { label "jenkins_slave"}
 
@@ -39,28 +57,28 @@ pipeline {
         ansiColor('xterm')
     }
 
+    environment {
+        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
+
+    }
+
     stages {
         stage('Verify Delius-Core IAPS') { 
             steps { 
-                sh '''
-                    #! bin/bash +x
-                    ls -ail
-                    ls -ail scripts/
-                    ls -ail scripts/windows/
-                '''
                 script {
                     verify_image('iaps.json')
                 }
+                sh('env')
             }
         }
 
-        stage('Build Delius-Core IAPS') { 
-            steps { 
-                script {
-                    build_image('iaps.json')
-                }
-            }
-        }
+        // stage('Build Delius-Core IAPS') { 
+        //     steps { 
+        //         script {
+        //             build_win_image('iaps.json')
+        //         }
+        //     }
+        // }
     }
     post {
         always {
