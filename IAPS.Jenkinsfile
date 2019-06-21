@@ -43,6 +43,7 @@ def build_win_image(filename) {
         set +x
         docker run --rm \
         -e BRANCH_NAME \
+        -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
         -e ZAIZI_BUCKET \
         -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
