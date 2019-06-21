@@ -2,7 +2,8 @@
     "variables": {
       "packer_profile": "packer",
       "branch_name": "{{env `BRANCH_NAME`}}",
-      "admin_pass": "{{env `WIN_ADMIN_PASS`}}"
+      "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
+      "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
     },
     "builders": [
       {
@@ -59,6 +60,11 @@
         {
             "type": "windows-shell",
             "script": "scripts/windows/iaps/InstallPackages.bat"
+        },
+        {
+            "type": "powershell",
+            "script": "scripts/windows/iaps/GetS3SetupArtefacts.ps1",
+            "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]   
         }
     ]
   }
