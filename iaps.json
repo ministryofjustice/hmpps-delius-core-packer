@@ -4,7 +4,8 @@
       "branch_name": "{{env `BRANCH_NAME`}}",
       "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
       "zaizi_bucket": "{{env `ZAIZI_BUCKET`}}",
-      "target_env":  "{{env `TARGET_ENV`}}"
+      "target_env":  "{{env `TARGET_ENV`}}",
+      "aws_region": "{{env `AWS_REGION`}}"
     },
     "builders": [
       {
@@ -66,7 +67,7 @@
         {
             "type": "powershell",
             "script": "scripts/windows/iaps/GetS3SetupArtefacts.ps1",
-            "environment_vars": ["ZAIZI_BUCKET={{user `zaizi_bucket`}}"]   
+            "environment_vars": ["ZAIZI_BUCKET={{user `zaizi_bucket`}}", "AWS_REGION={{user `aws_region`}}"]   
         }
     ]
   }

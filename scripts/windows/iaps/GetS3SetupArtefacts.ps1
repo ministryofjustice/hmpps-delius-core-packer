@@ -5,7 +5,7 @@ $keyPrefix = "IAPS/"
 # The local file path where files should be copied
 $localPath = "C:\Setup\"
 
-Read-S3Object -BucketName $env:ZAIZI_BUCKET -KeyPrefix $keyPrefix -Folder $localPath
+Read-S3Object -BucketName $env:ZAIZI_BUCKET -KeyPrefix $keyPrefix -Folder $localPath -Region $env:AWS_REGION
 
 if( (Get-ChildItem $localPath | Measure-Object).Count -eq 0)
 {
