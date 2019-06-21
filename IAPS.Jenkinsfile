@@ -68,7 +68,7 @@ pipeline {
     stages {
         stage('Verify Delius-Core IAPS') { 
             steps { 
-                sh('echo $GIT_BRANCH')
+                sh('echo $BRANCH_NAME')
                 script {
                     verify_image('iaps.json')
                 }
