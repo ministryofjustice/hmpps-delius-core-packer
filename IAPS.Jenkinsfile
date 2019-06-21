@@ -1,3 +1,7 @@
+def set_branch_name() {
+    return env.GIT_BRANCH.replace("/", "_")
+}
+
 def verify_image(filename) {
     wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
         sh '''
@@ -58,13 +62,12 @@ pipeline {
     environment {
         // TARGET_ENV is set on the jenkins slave and defaults to dev
         WIN_ADMIN_PASS = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt | jq -r .Parameters[0].Value)'
-        BRANCH_NAME = '$(echo $GIT_BRANCH | sed "s/\\//_/g")'
+        BRANCH_NAME = set_branch_name()
     }
 
     stages {
         stage('Verify Delius-Core IAPS') { 
             steps { 
-                sh('echo $BRANCH_NAME')
                 sh('echo $GIT_BRANCH')
                 script {
                     verify_image('iaps.json')
