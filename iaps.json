@@ -3,7 +3,8 @@
       "packer_profile": "packer",
       "branch_name": "{{env `BRANCH_NAME`}}",
       "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-      "zaizi_bucket": "{{env `ZAIZI_BUCKET`}}"
+      "zaizi_bucket": "{{env `ZAIZI_BUCKET`}}",
+      "target_env":  "{{env `TARGET_ENV`}}"
     },
     "builders": [
       {
