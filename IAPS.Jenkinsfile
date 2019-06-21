@@ -39,20 +39,24 @@ pipeline {
         ansiColor('xterm')
     }
 
-    triggers {
-        cron(env.BRANCH_NAME=='master'? 'H 4 * * 7': '')
-    }
-
     stages {
         stage('Verify Delius-Core AMIS') {
-            parallel {
-                stage('Verify Delius-Core IAPS') { steps { script {verify_image('iaps.json')}}}
+            stage('Verify Delius-Core IAPS') { 
+                steps { 
+                    script {
+                        verify_image('iaps.json')
+                    }
+                }
             }
         }
 
         stage('Build Delius-Core AMIS') {
-            parallel {
-                stage('Build Delius-Core IAPS') { steps { script {build_image('iaps.json')}}}
+            stage('Build Delius-Core IAPS') { 
+                steps { 
+                    script {
+                        build_image('iaps.json')
+                    }
+                }
             }
         }
     }
