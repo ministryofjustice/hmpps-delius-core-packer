@@ -58,7 +58,7 @@ pipeline {
     environment {
         // TARGET_ENV is set on the jenkins slave and defaults to dev
         WIN_ADMIN_PASS = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt | jq -r .Parameters[0].Value)'
-        BRANCH_NAME = "$(echo $GIT_BRANCH | sed 's/\//_/g')"
+        BRANCH_NAME = '$(echo $GIT_BRANCH | sed "s/\//_/g")''
     }
 
     stages {
