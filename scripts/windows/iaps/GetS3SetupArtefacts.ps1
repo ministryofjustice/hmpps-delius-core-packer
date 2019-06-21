@@ -6,7 +6,7 @@ $keyPrefix = "IAPS/"
 $localPath = "C:\Setup\"
 # Debug
 Get-ChildItem env:
-Read-S3Object -BucketName $env:ARTIFACT_BUCKET -KeyPrefix $keyPrefix -Folder $localPath
+Read-S3Object -BucketName $env:ZAIZI_BUCKET -KeyPrefix $keyPrefix -Folder $localPath
 
 if( (Get-ChildItem $localPath | Measure-Object).Count -eq 0)
 {

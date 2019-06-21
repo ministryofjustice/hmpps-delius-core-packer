@@ -3,7 +3,7 @@
       "packer_profile": "packer",
       "branch_name": "{{env `BRANCH_NAME`}}",
       "admin_pass": "{{env `WIN_ADMIN_PASS`}}",
-      "artifact_bucket": "{{env `ZAIZI_BUCKET`}}"
+      "zaizi_bucket": "{{env `ZAIZI_BUCKET`}}"
     },
     "builders": [
       {
@@ -64,7 +64,7 @@
         {
             "type": "powershell",
             "script": "scripts/windows/iaps/GetS3SetupArtefacts.ps1",
-            "environment_vars": ["ARTIFACT_BUCKET={{user `artifact_bucket`}}"]   
+            "environment_vars": ["ZAIZI_BUCKET={{user `zaizi_bucket`}}"]   
         }
     ]
   }

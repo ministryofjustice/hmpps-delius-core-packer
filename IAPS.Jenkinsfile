@@ -44,6 +44,7 @@ def build_win_image(filename) {
         docker run --rm \
         -e BRANCH_NAME \
         -e ARTIFACT_BUCKET \
+        -e ZAIZI_BUCKET \
         -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
         -e WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}" \
         -v `pwd`:/home/tools/data \
