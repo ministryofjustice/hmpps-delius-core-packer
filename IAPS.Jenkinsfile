@@ -61,5 +61,8 @@ pipeline {
                 }
             }
         }
+        stage('Delete Workspace') {
+            deleteDir()
+        }
     }
 }
