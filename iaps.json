@@ -59,7 +59,7 @@
     "provisioners": [
         {
             "type": "powershell",
-            "script": "scripts/Windows/IAPS/InstallPackages.ps1"
+            "script": "scripts/windows/iaps/InstallPackages.ps1"
         }
     ]
   }
