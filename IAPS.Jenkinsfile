@@ -42,6 +42,8 @@ pipeline {
     stages {
         stage('Verify Delius-Core IAPS') { 
             steps { 
+                script('ls -ail')
+                script('ls -ail scripts')
                 script {
                     verify_image('iaps.json')
                 }
