@@ -20,7 +20,7 @@
           "filters": {
             "virtualization-type": "hvm",
             "architecture": "x86_64",
-            "name": "HMPPS Windows Server Base master*",
+            "name": "HMPPS Windows Server Base master *",
             "root-device-type": "ebs"
           },
           "owners": ["895523100917"],

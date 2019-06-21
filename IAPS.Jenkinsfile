@@ -39,9 +39,7 @@ def build_win_image(filename) {
         set +x
         docker run --rm \
         -e BRANCH_NAME \
-        -e TARGET_ENV \
         -e ARTIFACT_BUCKET \
-        -e ZAIZI_BUCKET \
         -e WIN_ADMIN_PASS="${env.WIN_ADMIN_PASS}" \
         -e WIN_JENKINS_PASS="${env.WIN_JENKINS_PASS}" \
         -v `pwd`:/home/tools/data \
@@ -58,8 +56,9 @@ pipeline {
     }
 
     environment {
-        WIN_ADMIN_PASS   = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt --query Parameters[0].Value | sed \'s/"//g\')'
-
+        // TARGET_ENV is set on the jenkins slave and defaults to dev
+        WIN_ADMIN_PASS = '$(aws ssm get-parameters --names /${TARGET_ENV}/jenkins/windows/slave/admin/password --region eu-west-2 --with-decrypt | jq -r .Parameters[0].Value)'
+        BRANCH_NAME = $GIT_BRANCH
     }
 
     stages {
@@ -68,17 +67,16 @@ pipeline {
                 script {
                     verify_image('iaps.json')
                 }
-                sh('env')
             }
         }
 
-        // stage('Build Delius-Core IAPS') { 
-        //     steps { 
-        //         script {
-        //             build_win_image('iaps.json')
-        //         }
-        //     }
-        // }
+        stage('Build Delius-Core IAPS') { 
+            steps { 
+                script {
+                    build_win_image('iaps.json')
+                }
+            }
+        }
     }
     post {
         always {
