@@ -23,7 +23,8 @@ try {
     Set-DnsClientGlobalSetting -SuffixSearchList $dnsconfig.SuffixSearchList
     Clear-DnsClientCache
 }
-catch {
+catch [Exception] {
     Write-Host ('Failed to Update DNS Search Suffix List')
+    echo $_.Exception|format-list -force
     exit 1
 }

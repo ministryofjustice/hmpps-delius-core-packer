@@ -6,8 +6,9 @@ try {
     New-Item -Path 'C:\Setup\Oracle' -Name 'Install' -ItemType 'directory'
     Start-Process $env:ProgramFiles\7-Zip\7z.exe 'x -oC:\Setup\Oracle\Install C:\Setup\Oracle\Oracle_12c_Win32_12.1.0.2.0.7z' -Wait -Verb RunAs
 }
-catch {
+catch [Exception] {
     Write-Host ('Failed to extract Oracle client setup using 7z')
+    echo $_.Exception|format-list -force
     exit 1
 }
 # Add required patches for x86 client
@@ -21,14 +22,15 @@ try {
         exit 1
     }
     # Create x86 reg entry
-    # Push-Location
-    # Set-Location HKLM:
-    # New-Item -Path .\SOFTWARE\Wow6432Node -Name ORACLE -Type Directory –Force
-    # New-Itemproperty -Path .\SOFTWARE\Wow6432Node\ORACLE -Name 'inst_loc' -Value 'C:\Program Files (x86)\Oracle\Inventory' -PropertyType 'String'
-    # Pop-Location
+    Push-Location
+    Set-Location 'HKLM:'
+    New-Item -Path .\SOFTWARE\Wow6432Node -Name ORACLE -Type Directory –Force
+    New-Itemproperty -Path .\SOFTWARE\Wow6432Node\ORACLE -Name 'inst_loc' -Value 'C:\Program Files (x86)\Oracle\Inventory' -PropertyType 'String'
+    Pop-Location
 }
-catch {
+catch [Exception] {
     Write-Host ('Failed creating x86 registry entries')
+    echo $_.Exception|format-list -force
     exit 1
 }
 
@@ -38,8 +40,9 @@ try {
     $oracleanswerfile = 'C:\Setup\Oracle\OracleClient.rsp'
     Start-Process -FilePath 'C:\Setup\Oracle\Install\Oracle_12c_Win32_12.1.0.2.0\client32\setup.exe' -Verb RunAs 'ORACLE_HOSTNAME=$env:computername' -ArgumentList '-silent -nowelcome -nowait -noconfig -responseFile $oracleanswerfile' -Wait
 }
-catch {
+catch [Exception] {
     Write-Host ('Failed installing Oracle Client')
+    echo $_.Exception|format-list -force
     exit 1
 }
 # Configure net connections
@@ -48,7 +51,8 @@ catch {
 #     Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
 #     Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
 # }
-# catch {
+# catch [Exception] {
 #     Write-Host ('Error - Failed to create ora file: $tnsnameorafile')
+#     echo $_.Exception|format-list -force
 #     exit 1
 # }
