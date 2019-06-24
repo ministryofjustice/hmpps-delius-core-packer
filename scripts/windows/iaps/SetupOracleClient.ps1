@@ -1,3 +1,6 @@
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
+
 # Extract setup files from 7z archive
 try {
     New-Item -Path "C:\Setup\Oracle" -Name "Install" -ItemType "directory"
@@ -40,12 +43,12 @@ catch {
     exit 1
 }
 # Configure net connections
-try {
-    $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
-    Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
-    Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
-}
-catch {
-    Write-Host ("Error - Failed to create ora file: $tnsnameorafile")
-    exit 1
-}
+# try {
+#     $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
+#     Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
+#     Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
+# }
+# catch {
+#     Write-Host ("Error - Failed to create ora file: $tnsnameorafile")
+#     exit 1
+# }

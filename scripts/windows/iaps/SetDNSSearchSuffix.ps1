@@ -1,3 +1,6 @@
+$ErrorActionPreference = "Stop"
+$VerbosePreference = "Continue"
+
 # To simplify oracle client config by using hostname values only, 
 # add this environment's internal r53 zone suffix to the global search list at runtime
 
