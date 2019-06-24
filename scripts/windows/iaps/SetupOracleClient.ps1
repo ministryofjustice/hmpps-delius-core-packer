@@ -48,7 +48,6 @@ catch [Exception] {
 # Configure net connections
 try {
     $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
-    Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
     Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
 }
 catch [Exception] {
