@@ -38,7 +38,7 @@ catch [Exception] {
 # See: https://docs.oracle.com/database/121/NTCLI/advance.htm#NTCLI1347
 try {
     $oracleanswerfile = 'C:\Setup\Oracle\OracleClient.rsp'
-    Start-Process -FilePath 'C:\Setup\Oracle\Install\Oracle_12c_Win32_12.1.0.2.0\client32\setup.exe' -Verb RunAs 'ORACLE_HOSTNAME=$env:computername' -ArgumentList '-silent -nowelcome -nowait -noconfig -responseFile $oracleanswerfile' -Wait
+    Start-Process -FilePath 'C:\Setup\Oracle\Install\Oracle_12c_Win32_12.1.0.2.0\client32\setup.exe' -Verb RunAs -ArgumentList '-silent -nowelcome -nowait -noconfig "ORACLE_HOSTNAME=$env:computername" -responseFile $oracleanswerfile' -Wait
 }
 catch [Exception] {
     Write-Host ('Failed installing Oracle Client')
@@ -46,13 +46,13 @@ catch [Exception] {
     exit 1
 }
 # Configure net connections
-# try {
-#     $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
-#     Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
-#     Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
-# }
-# catch [Exception] {
-#     Write-Host ('Error - Failed to create ora file: $tnsnameorafile')
-#     echo $_.Exception|format-list -force
-#     exit 1
-# }
+try {
+    $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
+    Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
+    Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
+}
+catch [Exception] {
+    Write-Host ('Error - Failed to create ora file: $tnsnameorafile')
+    echo $_.Exception|format-list -force
+    exit 1
+}

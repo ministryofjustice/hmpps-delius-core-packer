@@ -4,16 +4,18 @@ $VerbosePreference = "Continue"
 # To simplify oracle client config by using hostname values only, 
 # add this environment's internal r53 zone suffix to the global search list at runtime
 
-# Create a startup job to update dns search suffix with internal domain name
 try {
-    # Move this to its own try catch as it will throw an err
-    if ( (Get-ScheduledJob -Name UpdateDNSSearchSuffix | Measure-Object).Count -eq 0 ) {
+    f ( (Get-ScheduledJob -Name UpdateDNSSearchSuffix | Measure-Object).Count -eq 0 ) {
         $trigger = New-JobTrigger -AtStartup -RandomDelay 00:00:30
         Register-ScheduledJob -Trigger $trigger -FilePath C:\Setup\SetDNSSearchSuffix.ps1 -Name UpdateDNSSearchSuffix
     } else {
         Write-Host ('Existing trigger job found.')
     }
+}
+catch {}
 
+# Create a startup job to update dns search suffix with internal domain name
+try {
     # Get the instance id from ec2 meta data
     $instanceid = Invoke-WebRequest -Uri http://169.254.169.254/latest/meta-data/instance-id | Select-Object -ExpandProperty Content
     # Get the environment name from this instance's environment-name tag value
