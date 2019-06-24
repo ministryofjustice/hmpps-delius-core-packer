@@ -25,5 +25,5 @@ $oracleanswerfile = "C:\Setup\Oracle\OracleClient.rsp"
 Start-Process -FilePath "C:\Setup\Oracle\Install\Oracle_12c_Win32_12.1.0.2.0\client32\setup.exe" -Verb RunAs "ORACLE_HOSTNAME=$env:computername" -ArgumentList "-silent -nowelcome -nowait -noconfig -responseFile $oracleanswerfile" -Wait
 # Configure net connections
 $tnsnameorafile = "C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora"
-Move-Item "$tnsnameorafile" -Destination "$tnsnameorafile.orig" -Force
-Copy-Item "C:\Setup\Oracle\tnsnames.ora.tmpl" -Destination "$tnsnameorafile"
+Move-Item $tnsnameorafile -Destination $tnsnameorafile'.orig' -Force
+Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
