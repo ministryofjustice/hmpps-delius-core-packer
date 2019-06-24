@@ -6,6 +6,7 @@ $VerbosePreference = "Continue"
 
 # Create a startup job to update dns search suffix with internal domain name
 try {
+    # Move this to its own try catch as it will throw an err
     if ( (Get-ScheduledJob -Name UpdateDNSSearchSuffix | Measure-Object).Count -eq 0 ) {
         $trigger = New-JobTrigger -AtStartup -RandomDelay 00:00:30
         Register-ScheduledJob -Trigger $trigger -FilePath C:\Setup\SetDNSSearchSuffix.ps1 -Name UpdateDNSSearchSuffix
