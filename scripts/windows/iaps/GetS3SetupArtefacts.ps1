@@ -1,5 +1,5 @@
 $ErrorActionPreference = "Stop"
-$VerbosePreference="Continue"
+$VerbosePreference = "Continue"
 
 $keyPrefix = "IAPS/"
 # The local file path where files should be copied
