@@ -46,12 +46,12 @@ catch [Exception] {
     exit 1
 }
 # Configure net connections
-try {
-    $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
-    Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
-}
-catch [Exception] {
-    Write-Host ('Error - Failed to create ora file: $tnsnameorafile')
-    echo $_.Exception|format-list -force
-    exit 1
-}
+# try {
+#     $tnsnameorafile = 'C:\app\client\Administrator\product\12.1.0\client_1\network\admin\tnsnames.ora'
+#     Copy-Item 'C:\Setup\Oracle\tnsnames.ora.tmpl' -Destination $tnsnameorafile
+# }
+# catch [Exception] {
+#     Write-Host ('Error - Failed to create ora file: $tnsnameorafile')
+#     echo $_.Exception|format-list -force
+#     exit 1
+# }
