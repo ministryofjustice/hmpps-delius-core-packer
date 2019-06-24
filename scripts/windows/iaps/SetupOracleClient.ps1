@@ -21,11 +21,11 @@ try {
         exit 1
     }
     # Create x86 reg entry
-    Push-Location
-    Set-Location HKLM:
-    New-Item -Path .\SOFTWARE\Wow6432Node -Name ORACLE -Type Directory –Force
-    New-Itemproperty -Path .\SOFTWARE\Wow6432Node\ORACLE -Name 'inst_loc' -Value 'C:\Program Files (x86)\Oracle\Inventory' -PropertyType 'String'
-    Pop-Location
+    # Push-Location
+    # Set-Location HKLM:
+    # New-Item -Path .\SOFTWARE\Wow6432Node -Name ORACLE -Type Directory –Force
+    # New-Itemproperty -Path .\SOFTWARE\Wow6432Node\ORACLE -Name 'inst_loc' -Value 'C:\Program Files (x86)\Oracle\Inventory' -PropertyType 'String'
+    # Pop-Location
 }
 catch {
     Write-Host ('Failed creating x86 registry entries')
