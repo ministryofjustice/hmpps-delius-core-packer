@@ -6,8 +6,10 @@ $VerbosePreference = "Continue"
 
 try {
     if ( (Get-ScheduledJob -Name UpdateDNSSearchSuffix | Measure-Object).Count -eq 0 ) {
+        Write-Host ('Creating DNS SearchSuffix Run Once Job')
         $trigger = New-JobTrigger -AtStartup -RandomDelay 00:00:30
         Register-ScheduledJob -Trigger $trigger -FilePath C:\Setup\SetDNSSearchSuffix.ps1 -Name UpdateDNSSearchSuffix
+        Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name UpdateDNSSearchSuffix -Value C:\Setup\SetDNSSearchSuffix.ps1
     } else {
         Write-Host ('Existing trigger job found.')
     }
