@@ -96,7 +96,7 @@
         },
         {
             "type": "powershell",
-            "script": "scripts/windows/iaps/SetDNSSearchSuffix.ps1"
+            "script": "scripts/windows/iaps/InstallSQLDeveloper.ps1"
         },
         {
             "type": "powershell",
