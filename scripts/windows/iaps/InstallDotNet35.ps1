@@ -44,9 +44,12 @@ try {
     $winvolume = Add-EC2Volume -InstanceId $instanceid -VolumeId $ebsvolume.VolumeId -Device xvdh
     Write-Host('Checking Windows Disk Manager Status')
     $winvolumestatus = Get-Disk -Number 1
-    Set-Disk -Number 1 –IsOffline $False
     while ($winvolumestatus.OperationalStatus -ne "Online") {
         Write-Host('Waiting for new disk to come online. Current status: ' + $winvolumestatus.OperationalStatus)
+        if ($winvolumestatus.OperationalStatus -ne "Offline") {
+            Write-Host('Set Disk 1 Online')
+            Set-Disk -Number 1 -IsOffline $False
+        }
         Start-Sleep -Seconds 10
         Clear-Variable -Name winvolumestatus
         # Debug step
@@ -60,6 +63,7 @@ try {
 catch [Exception] {
     Write-Host ('Failed to attach Win 2012R2 Install Media from EBS Snapshot')
     echo $_.Exception|format-list -force
+    Exit 1
 }
 
 try {
@@ -76,6 +80,7 @@ try {
 catch [Exception] {
     Write-Host ('Failed to enable .Net3.5 Windows Feature')
     echo $_.Exception|format-list -force
+    Exit 1
 }
 
 try {
@@ -101,4 +106,5 @@ try {
 catch [Exception] {
     Write-Host ('Failed to remove Windows Media EBS Volume')
     echo $_.Exception|format-list -force
+    Exit 1
 }
