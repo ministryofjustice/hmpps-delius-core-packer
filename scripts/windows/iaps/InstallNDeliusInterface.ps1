@@ -46,7 +46,7 @@ try {
     # https://dsdmoj.atlassian.net/browse/DAM-188
 }
 catch [Exception] {
-    Write-Host ('Failed to Update DNS Search Suffix List')
+    Write-Host ('Failed to Install NDelius Interface')
     echo $_.Exception|format-list -force
     exit 1
 }

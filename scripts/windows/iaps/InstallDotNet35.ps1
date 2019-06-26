@@ -48,6 +48,8 @@ try {
         Write-Host('Waiting for new disk to come online. Current status: ' + $winvolumestatus.OperationalStatus)
         Start-Sleep -Seconds 10
         Clear-Variable -Name winvolumestatus
+        # Debug step
+        Get-Disk
         $winvolumestatus = Get-Disk -Number 1
     }
     Write-Host('New Disk Online - Making Available')
@@ -96,6 +98,6 @@ try {
     Remove-EC2Volume -VolumeId $ebsvolume.VolumeId -Force -PassThru
 }
 catch [Exception] {
-    Write-Host ('Failed to remove Windows media install')
+    Write-Host ('Failed to remove Windows Media EBS Volume')
     echo $_.Exception|format-list -force
 }
