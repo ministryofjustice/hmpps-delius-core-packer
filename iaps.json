@@ -66,10 +66,6 @@
         },
         {
             "type": "powershell",
-            "script": "scripts/windows/iaps/InstallDotNet35.ps1"
-        },
-        {
-            "type": "powershell",
             "script": "scripts/windows/iaps/IAPSFirewallRules.ps1"  
         },
         {

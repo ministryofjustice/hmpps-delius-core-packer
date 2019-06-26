@@ -3,7 +3,9 @@ $VerbosePreference = "Continue"
 
 try {
     Write-Host('Installing DotNet3.5')
-    Enable-WindowsOptionalFeature -Online -FeatureName "NetFx3" -All
+    Write-Host('Installing NDelius Interface Package')
+    Start-Process -Wait -FilePath "C:\Setup\Source Files\dotnetfx35.exe" -ArgumentList "/quiet /qn" -Verb RunAs
+
 }
 catch [Exception] {
     Write-Host ('Failed to enable .Net3.5 Windows Feature')

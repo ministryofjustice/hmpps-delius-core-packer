@@ -1,5 +1,8 @@
 REM Chocolatey installed on base image
 
+REM DotNet 3.5
+DISM /online /enable-feature /featurename:NetFx3 /all
+
 REM vcredist packages
 choco install -y vcredist2010
 if %errorlevel% neq 0 exit /b %errorlevel%
