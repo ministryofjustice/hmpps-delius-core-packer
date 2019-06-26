@@ -58,7 +58,7 @@ try {
     }
     Write-Host('New Disk Online - Making Available')
     $winvolumedrive = Get-Partition -DiskNumber 1 
-    $winvolumeready = Set-Partition -DriveLetter $winvolumedrive.DriveLetter -IsActive $true 
+    $winvolumeready = Set-Partition -DriveLetter $winvolumedrive.DriveLetter -IsActive $true -IsReadOnly $true
 }
 catch [Exception] {
     Write-Host ('Failed to attach Win 2012R2 Install Media from EBS Snapshot')
