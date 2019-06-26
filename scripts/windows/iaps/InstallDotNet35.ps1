@@ -46,7 +46,7 @@ try {
     $winvolumestatus = Get-Disk -Number 1
     while ($winvolumestatus.OperationalStatus -ne "Online") {
         Write-Host('Waiting for new disk to come online. Current status: ' + $winvolumestatus.OperationalStatus)
-        if ($winvolumestatus.OperationalStatus -ne "Offline") {
+        if ($winvolumestatus.OperationalStatus -eq "Offline") {
             Write-Host('Set Disk 1 Online')
             Set-Disk -Number 1 -IsOffline $False
         }
