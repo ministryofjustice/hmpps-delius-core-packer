@@ -103,6 +103,10 @@
         },
         {
             "type": "powershell",
+            "script": "scripts/windows/iaps/InstallIMInterface.ps1"
+        },
+        {
+            "type": "powershell",
             "script": "scripts/windows/iaps/ReEnableUserData.ps1"
         },
         {
