@@ -95,6 +95,10 @@
         },
         {
             "type": "powershell",
+            "script": "scripts/windows/iaps/InstallNDeliusInterface.ps1"
+        },
+        {
+            "type": "powershell",
             "script": "scripts/windows/iaps/ReEnableUserData.ps1"
         },
         {

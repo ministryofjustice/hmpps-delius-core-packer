@@ -1,5 +1,8 @@
 # Chocolatey installed on base image
 
+# .Net packages
+choco install -y dotnet3.5 --version 3.5.20160716
+
 # vcredist packages
 choco install -y vcredist2010
 choco install -y vcredist2008
