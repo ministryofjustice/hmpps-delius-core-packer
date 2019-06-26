@@ -90,17 +90,22 @@
             "elevated_password": "{{user `admin_pass`}}"
         },
         {
-            "type": "file",
-            "source": "scripts/windows/iaps/SetDNSSearchSuffix.ps1",
-            "destination": "C:\\Setup\\SetDNSSearchSuffix.ps1"
-        },
-        {
             "type": "powershell",
             "script": "scripts/windows/iaps/InstallSQLDeveloper.ps1"
         },
         {
             "type": "powershell",
             "script": "scripts/windows/iaps/ReEnableUserData.ps1"
+        },
+        {
+            "type": "file",
+            "source": "scripts/windows/iaps/SetDNSSearchSuffix.ps1",
+            "destination": "C:\\Setup\\RunTimeConfig\\SetDNSSearchSuffix.ps1"
+        },
+        {
+            "type": "file",
+            "source": "scripts/windows/iaps/ImportACMCertificates.ps1",
+            "destination": "C:\\Setup\\RunTimeConfig\\ImportACMCertificates.ps1"
         }
     ]
   }
