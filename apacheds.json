@@ -54,7 +54,8 @@
         "077643444046",
         "479759138745",
         "349354156492",
-        "431912413968"
+        "431912413968",
+        "766455809178"
       ],
       "ami_name": "HMPPS Delius-Core ApacheDS {{user `branch_name`}} {{timestamp}}",
       "ssh_interface": "private_ip",
