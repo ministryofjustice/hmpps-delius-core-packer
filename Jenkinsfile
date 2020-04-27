@@ -54,8 +54,8 @@ pipeline {
             parallel {
                 //stage('Verify Delius-Core Weblogic') { steps { script {verify_image('weblogic.json')}}}
                 //stage('Verify Delius-Core Weblogic Admin') { steps { script {verify_image('weblogic-admin.json')}}}
-                stage('Verify Delius-Core OracleDB') { steps { script {verify_image('oracledb.json')}}}
-                //stage('Verify Delius-Core OracleDB 11g') { steps { script {verify_image('oracle11g.json')}}}
+                //stage('Verify Delius-Core OracleDB') { steps { script {verify_image('oracledb.json')}}}
+                stage('Verify Delius-Core OracleDB 11g') { steps { script {verify_image('oracle11g.json')}}}
                 //stage('Verify Delius-Core OracleDB 18c') { steps { script {verify_image('oracle18c.json')}}}
                 //stage('Verify Delius-Core OracleDB 19c') { steps { script {verify_image('oracle19c.json')}}}
                 //stage('Verify Delius-Core ApacheDS') { steps { script {verify_image('apacheds.json')}}}
@@ -67,8 +67,8 @@ pipeline {
             parallel {
                 //stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
                 //stage('Build Delius-Core Weblogic Admin') { steps { script {build_image('weblogic-admin.json')}}}
-                stage('Build Delius-Core OracleDB') { steps { script {build_image('oracledb.json')}}}
-                //stage('Verify Delius-Core OracleDB 11g') { steps { script {verify_image('oracle11g.json')}}}
+                //stage('Build Delius-Core OracleDB') { steps { script {build_image('oracledb.json')}}}
+                stage('Verify Delius-Core OracleDB 11g') { steps { script {verify_image('oracle11g.json')}}}
                 //stage('Verify Delius-Core OracleDB 18c') { steps { script {verify_image('oracle18c.json')}}}
                 //stage('Verify Delius-Core OracleDB 19c') { steps { script {verify_image('oracle19c.json')}}}
                 //stage('Build Delius-Core ApacheDS') { steps { script {build_image('apacheds.json')}}}
