@@ -138,7 +138,7 @@ oracle_database_kernel_params:
   kernel.sem: 250 32000 100 128
   kernel.shmmni: 4096
 # 1.5 GB Shared memory 500mb for linux kernel (for 2GB virtual machine)
-  kernel.shmall: 393216
+  kernel.shmall: 10737418240
 # 1 GB Half of the physical memory (for 2GB virtual machine)
   kernel.shmmax: 4398046511104
 # For 1Gbps with 1ms latency 16MB buffer
@@ -151,7 +151,7 @@ oracle_database_kernel_params:
   vm.dirty_background_ratio: 5
   vm.dirty_ratio: 10
 # Max open file descriptors 512 * db processes + room for os
-  fs.file-max: 409600
+  fs.file-max: 6815744
 # Shorten keep alive of connections
   net.ipv4.tcp_keepalive_time: 300
   net.ipv4.tcp_keepalive_intvl: 60
@@ -176,7 +176,8 @@ oracle_database_limits_soft_memlock: 1887437
 oracle_database_limits_hard_memlock: 1887437
 
 
-artefact_path: "delius-core/oracle/rdbms"
+#artefact_path: "delius-core/oracle/rdbms"
+artefact_path: "dependencies/oracle/rdbms"
 
 oracledb_artefacts:
   - name: 'p13390677_112040_Linux-x86-64_1of7.zip'
@@ -202,5 +203,6 @@ oracledb_rpms:
 
 oracledb_osbws:
   - name: 'osbws_install_12.2.0.1.0.jar'
+    dest_path: "{{ oracle_osbws_installer_directory }}"
 
 artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + oracledb_osbws + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
