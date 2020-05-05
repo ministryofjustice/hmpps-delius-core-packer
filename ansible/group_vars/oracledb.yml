@@ -194,5 +194,6 @@ oracledb_rpms:
 
 oracledb_osbws:
   - name: 'osbws_install_12.2.0.1.0.jar'
+    dest_path: "{{ oracle_osbws_installer_directory }}"
 
 artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + oracledb_osbws + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
