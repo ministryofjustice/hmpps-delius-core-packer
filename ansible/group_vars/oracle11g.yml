@@ -43,7 +43,9 @@ system:
     - make
     - net-tools
     - perl-URI
+    - psmisc
     - sysstat
+    - smartmontools
     - unixODBC
     - unixODBC-devel
     - unzip
@@ -115,13 +117,11 @@ database_memorylimit: "1000"
 
 # installers
 oracle_database_installer_directory: "{{ mount_point }}/software/11gR/database"
-oracle_grid_installer_directory: "{{ mount_point }}/software/11gR/grid"
+oracle_grid_installer_directory: "{{ mount_point }}/software/19c/patches"
 oracle_patch_installer_directory: "{{ mount_point }}/software/11gR/patches"
 oracle_osbws_installer_directory: "{{ mount_point }}/software/11gR/osbws"
 oracle_database_response_file: "db11g"
-oracle_grid_response_file: "grid11g"
-oracle_asm_response_file: "grid-config-asm"
-oracle_dbca_response_file: "dbca-install"
+oracle_grid_response_file: "grid19c"
 
 # oracle-database
 oracle_database_inventory_location: "{{ mount_point }}/app/oraInventory"
@@ -129,7 +129,7 @@ oracle_database_oracle_base: "{{ mount_point }}/app/oracle"
 oracle_database_oracle_home: "{{ oracle_database_oracle_base }}/product/11.2.0.4/db"
 oracle_database_datalocation: "{{ oracle_database_oracle_base }}/oradata"
 oracle_grid_oracle_base: "{{ mount_point }}/app/grid"
-oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/11.2.0.4/grid"
+oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/19.0.0.0/grid"
 
 
 oracle_database_kernel_params:
@@ -138,7 +138,7 @@ oracle_database_kernel_params:
   kernel.sem: 250 32000 100 128
   kernel.shmmni: 4096
 # 1.5 GB Shared memory 500mb for linux kernel (for 2GB virtual machine)
-  kernel.shmall: 393216
+  kernel.shmall: 10737418240
 # 1 GB Half of the physical memory (for 2GB virtual machine)
   kernel.shmmax: 4398046511104
 # For 1Gbps with 1ms latency 16MB buffer
@@ -151,19 +151,23 @@ oracle_database_kernel_params:
   vm.dirty_background_ratio: 5
   vm.dirty_ratio: 10
 # Max open file descriptors 512 * db processes + room for os
-  fs.file-max: 409600
+  fs.file-max: 6815744
 # Shorten keep alive of connections
   net.ipv4.tcp_keepalive_time: 300
   net.ipv4.tcp_keepalive_intvl: 60
   net.ipv4.tcp_keepalive_probes: 10
 # maximize port range
   net.ipv4.ip_local_port_range: 9000 65500
-
+# Socket send and receive buffer size
+  net.core.rmem_default: 262144
+  net.core.wmem_default: 262144
+# Asynchronous non-blocking I/O 
+  fs.aio-max-nr: 1048576
 
 # Oracle user limits
 oracle_database_limits_soft_no_file: 4096
 oracle_database_limits_hard_no_file: 65536
-oracle_database_limits_soft_nproc: 2047
+oracle_database_limits_soft_nproc: 16384
 oracle_database_limits_hard_nproc: 16384
 oracle_database_limits_soft_stack: 10240
 oracle_database_limits_hard_stack: 32768
@@ -173,16 +177,20 @@ oracle_database_limits_hard_memlock: 1887437
 
 
 artefact_path: "delius-core/oracle/rdbms"
+
 oracledb_artefacts:
   - name: 'p13390677_112040_Linux-x86-64_1of7.zip'
   - name: 'p13390677_112040_Linux-x86-64_2of7.zip'
-  - name: 'p13390677_112040_Linux-x86-64_3of7.zip'
 
 oracledb_patches:
-  - name: 'p18370031_112040_Linux-x86-64.zip'
-    dest_path: "{{ oracle_patch_installer_directory }}"
   - name: 'p27726505_112040_Linux-x86-64.zip'
     dest_path: "{{ oracle_patch_installer_directory }}"
+
+oraclegrid_artefacts:
+  - name: 'LINUX.X64_193000_grid_home.zip'
+
+oraclegrid_patches:
+  - name: 'p30899722_190000_Linux-x86-64.zip'
 
 oracledb_post_patches:
   - name: 'p6880880_112000_Linux-x86-64.zip'
