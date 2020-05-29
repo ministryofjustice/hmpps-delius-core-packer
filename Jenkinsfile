@@ -71,18 +71,18 @@ pipeline {
         cron(env.BRANCH_NAME=='master'? '#H 4 * * 7': '')
     }
 
+    environment {
+        // TARGET_ENV is set on the jenkins slave and defaults to dev
+        AWS_REGION        = "eu-west-2"
+        BRANCH_NAME       = set_branch_name()
+        IMAGE_TAG_VERSION = set_tag_version()
+}
+
     stages {
         stage ('Notify build started') {
             steps {
                 slackSend(message: "Build Started - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL.replace(':8080','')}|Open>)")
             }
-        }
-
-        environment {
-            // TARGET_ENV is set on the jenkins slave and defaults to dev
-            AWS_REGION        = "eu-west-2"
-            BRANCH_NAME       = set_branch_name()
-            IMAGE_TAG_VERSION = set_tag_version()
         }
 
         stage('IAPS - Packer Verify') {
