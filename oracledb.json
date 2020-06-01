@@ -65,7 +65,8 @@
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Delius-Core OracleDB {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
-        "image_tag_version": "{{user `image_tag_version`}}"
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer"
       },
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
