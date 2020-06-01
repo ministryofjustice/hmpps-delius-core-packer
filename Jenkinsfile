@@ -85,7 +85,7 @@ pipeline {
             }
         }
 
-        stage('IAPS - Packer Verify') {
+        stage('Output Branch Name and Tag') {
             steps {
                 sh('echo $BRANCH_NAME')
                 sh('echo $IMAGE_TAG_VERSION')
