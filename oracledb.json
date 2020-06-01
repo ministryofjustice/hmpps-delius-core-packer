@@ -4,7 +4,8 @@
     "branch_name": "{{env `BRANCH_NAME`}}",
     "env": "{{env `TARGET_ENV`}}",
     "bucket": "{{env `ARTIFACT_BUCKET`}}",
-    "wl_bucket": "{{env `ZAIZI_BUCKET` }}"
+    "wl_bucket": "{{env `ZAIZI_BUCKET` }}",
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "provisioners": [
     {
@@ -63,7 +64,8 @@
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS Delius-Core OracleDB {{user `branch_name`}} {{timestamp}}",
-        "Git_Branch": "{{user `branch_name`}}"
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}"
       },
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
