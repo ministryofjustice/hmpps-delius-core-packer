@@ -55,7 +55,7 @@ system:
     - zlib-devel
 
 install_jdk: true
-java_version: 7u181
+java_version: 7u261
 
 system_groups:
   - group: "{{ system_users.0.group }}"
