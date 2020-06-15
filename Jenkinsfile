@@ -45,7 +45,7 @@ def get_git_latest_master_tag() {
                                     mojdigitalstudio/hmpps-packer-builder \
                                     bash -c 'git describe --tags --exact-match'""",
                     returnStdout: true
-                 ).trim()    
+                 ).trim()
     return git_branch
 }
 
@@ -105,17 +105,16 @@ pipeline {
 
         stage('Build Delius-Core AMIS') {
             parallel {
-                stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
+                stage('Build Delius-Core Weblogic') {
+                    steps {
+                        script { build_image('weblogic.json') }
+                        script { build_image('weblogic-admin.json') }
+                    }
+                }
                 stage('Build OracleDB') { steps { script {build_image('oracledb.json')}}}
                 stage('Build OracleDB 11g') { steps { script {build_image('oracle11g.json')}}}
                 stage('Build Delius-Core ApacheDS') { steps { script {build_image('apacheds.json')}}}
                 stage('Build Delius-Core Oracle-Client') { steps { script {build_image('oracle-client.json')}}}
-            }
-        }
-
-        stage('Build Delius-Core Weblogic Admin AMI') {
-            parallel {
-                stage('Build Delius-Core Weblogic Admin') { steps { script {build_image('weblogic-admin.json')}}}
             }
         }
     }
