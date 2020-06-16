@@ -1,6 +1,0 @@
----
-
-- name: packages
-  src: https://github.com/ministryofjustice/hmpps-ansible-packages.git
-- name: apacheds
-  src: https://github.com/ministryofjustice/hmpps-delius-core-apacheds-installer.git
