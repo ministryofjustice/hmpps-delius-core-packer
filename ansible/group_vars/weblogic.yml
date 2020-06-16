@@ -36,7 +36,7 @@ artefact_path: "delius-core/oracle/wls"
 weblogic_artefacts:
   - name: 'wls1036_generic.jar'
   - name: 'p27238412_1036_Generic.zip'
-  - name: 'p30857748_1036_Generic.zip'
+  - name: 'p30463097_1036_Generic.zip'
   - name: 'p11817754_10360200114_Generic.zip'
 
 bsu_mem_args: -Xms3g -Xmx3g
@@ -46,10 +46,10 @@ weblogic_patches:
   - name: "p27238412_1036_Generic"
     command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu/cache_dir && bash bsu_update.sh install"
     creates_file: "bsu_update.sh"
-  # Patch 30857748: WLS PATCH SET UPDATE 10.3.6.0.200414
-  - name: "p30857748_1036_Generic"
-    creates_file: "Q3ZB.jar"
-    command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=Q3ZB -prod_dir=${WLS_HOME} -verbose -log=Q3ZB_patch.log"
+  # Patch 30463097: WLS PATCH SET UPDATE 10.3.6.0.200114
+  - name: "p30463097_1036_Generic"
+    creates_file: "JWEB.jar"
+    command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=JWEB -prod_dir=${WLS_HOME} -verbose -log=JWEB_patch.log"
   # Overlay: FEATURE TO COPY THE WEBLOGIC AUTHENTICATED USER IN THE ORACLE CLIENT ID FIELD
   - name: "p11817754_10360200114_Generic"
     creates_file: "PZ7S.jar"
