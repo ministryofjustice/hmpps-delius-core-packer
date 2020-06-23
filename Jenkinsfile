@@ -61,7 +61,7 @@ def set_tag_version() {
 }
 
 pipeline {
-    agent { label "jenkins_slave"}
+    agent { label "jenkins_agent"}
 
     options {
         ansiColor('xterm')
@@ -72,7 +72,7 @@ pipeline {
     }
 
     environment {
-        // TARGET_ENV is set on the jenkins slave and defaults to dev
+        // TARGET_ENV is set on the jenkins agent and defaults to dev
         AWS_REGION        = "eu-west-2"
         BRANCH_NAME       = set_branch_name()
         IMAGE_TAG_VERSION = set_tag_version()
