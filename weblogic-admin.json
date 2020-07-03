@@ -59,7 +59,6 @@
         "330914586320",
         "130847504577",
         "434401102446",
-        "479759138745",
         "766455809178"
       ],
       "ami_name": "HMPPS Delius-Core Weblogic-Admin {{user `branch_name`}} {{timestamp}}",
