@@ -98,6 +98,7 @@ pipeline {
                 stage('Verify Delius-Core Weblogic Admin') { steps { script {verify_image('weblogic-admin.json')}}}
                 stage('Verify OracleDB') { steps { script {verify_image('oracledb.json')}}}
                 stage('Verify OracleDB 11g') { steps { script {verify_image('oracle11g.json')}}}
+                stage('Verify OracleDB 18c') { steps { script {verify_image('oracle18c.json')}}}
                 stage('Verify Delius-Core Oracle-Client') { steps { script {verify_image('oracle-client.json')}}}
             }
         }
@@ -107,6 +108,7 @@ pipeline {
                 stage('Build Delius-Core Weblogic') { steps { script {build_image('weblogic.json')}}}
                 stage('Build OracleDB') { steps { script {build_image('oracledb.json')}}}
                 stage('Build OracleDB 11g') { steps { script {build_image('oracle11g.json')}}}
+                stage('Build OracleDB 18c') { steps { script {build_image('oracle18c.json')}}}
                 stage('Build Delius-Core Oracle-Client') { steps { script {build_image('oracle-client.json')}}}
             }
         }

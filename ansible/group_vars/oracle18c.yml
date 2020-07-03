@@ -1,0 +1,206 @@
+---
+
+system:
+  packages:
+    - bc
+    - binutils
+    - compat-libcap1
+    - compat-libstdc++-33
+    - compat-libstdc++-33.i686
+    - dpkg
+    - elfutils-libelf-devel
+    - fonts-*
+    - gcc
+    - gcc-c++
+    - glibc
+    - glibc-devel
+    - glibc-devel.i686
+    - glibc.i686
+    - kmod-oracleasm
+    - ksh
+    - libaio
+    - libaio-devel
+    - libaio-devel.i686
+    - libaio.i686
+    - libgcc
+    - libgcc.i686
+    - libstdc++
+    - libstdc++-devel
+    - libstdc++-devel.i686
+    - libstdc++.i686
+    - libX11
+    - libX11.i686
+    - libXau
+    - libXau.i686
+    - libxcb
+    - libxcb.i686
+    - libXext
+    - libXext.i686
+    - libXi
+    - libXi.i686
+    - libXtst
+    - libXtst.i686
+    - make
+    - net-tools
+    - perl-URI
+    - psmisc
+    - sysstat
+    - smartmontools
+    - unixODBC
+    - unixODBC-devel
+    - unzip
+    - xorg-x11-apps
+    - xorg-x11-utils
+    - xorg-x11-xinit
+    - zlib-devel
+
+install_jdk: true
+java_version: 7u181
+
+system_groups:
+  - group: "{{ system_users.0.group }}"
+    gid: "{{ system_users.0.gid }}"
+  - group: dba
+    gid: 54322
+  - group: oper
+    gid: 54323
+
+java_home: "{{ lookup('env', 'JAVA_HOME') or '/usr/java/latest' }}"
+
+system_users:
+  - name: oracle
+    uid: 1200
+    group: oinstall
+    groups: "oinstall, dba, oper"
+    gid: 54321
+    profile: |
+      alias ll='ls -lah'
+      alias cp='cp -iv'
+
+      export ORACLE_HOSTNAME=localhost
+      export ORACLE_UNQNAME={{ database_global_database_name }}
+      export ORACLE_BASE={{ oracle_database_oracle_base }}
+      export ORACLE_HOME={{ oracle_database_oracle_home }}
+      export ORACLE_SID={{ database_sid }}
+      export ORACLE_TERM=xterm
+      export PATH=/usr/sbin:/usr/local/bin:$PATH
+      export PATH=$ORACLE_HOME/bin:$PATH
+      export JAVA_HOME={{ java_home }}
+      export PATH=$JAVA_HOME/bin:$PATH
+      export LD_LIBRARY_PATH=$ORACLE_HOME/lib:/lib:/usr/lib
+      export CLASSPATH=$ORACLE_HOME/JRE:$ORACLE_HOME/jlib:$ORACLE_HOME/rdbms/jlib
+
+      if [ $USER = "oracle" ]; then
+        if [ $SHELL = "/bin/ksh" ]; then
+          ulimit -p 16384
+          ulimit -n 65536
+        else
+          ulimit -u 16384 -n 65536
+        fi
+      fi
+
+
+mount_point: "/u01"
+device_name: "/dev/xvdb"
+mount_owner: "{{ system_users.0.name }}"
+mount_group: "{{ system_users.0.group }}"
+
+# installation variables
+oracle_database_version: 11g # supported versions: [11g]
+oracle_database_edition: EE # supported editions: [SE,EE]
+
+database_selected_languages: "en,en_GB"
+database_characterset: "AL32UTF8"
+database_global_database_name: "TEST"
+database_sid: "TEST"
+database_memorylimit: "1000"
+
+# installers
+oracle_database_installer_directory: "{{ mount_point }}/software/18c/database"
+oracle_grid_installer_directory: "{{ mount_point }}/software/19c/patches"
+oracle_patch_installer_directory: "{{ mount_point }}/software/18c/patches"
+oracle_osbws_installer_directory: "{{ mount_point }}/software/18c/osbws"
+oracle_database_response_file: "db18c"
+oracle_grid_response_file: "grid19c"
+
+# oracle-database
+oracle_database_inventory_location: "{{ mount_point }}/app/oraInventory"
+oracle_database_oracle_base: "{{ mount_point }}/app/oracle"
+oracle_database_oracle_home: "{{ oracle_database_oracle_base }}/product/18.0.0.0/db"
+oracle_grid_oracle_base: "{{ mount_point }}/app/grid"
+oracle_grid_oracle_home: "{{ oracle_grid_oracle_base }}/product/19.0.0.0/grid"
+
+
+oracle_database_kernel_params:
+# Shared memory and semaphore
+# look for document 226209.1 in oracle support for details
+  kernel.sem: 250 32000 100 128
+  kernel.shmmni: 4096
+# 1.5 GB Shared memory 500mb for linux kernel (for 2GB virtual machine)
+  kernel.shmall: 10737418240
+# 1 GB Half of the physical memory (for 2GB virtual machine)
+  kernel.shmmax: 4398046511104
+# For 1Gbps with 1ms latency 16MB buffer
+  net.core.rmem_max: 16777216
+  net.core.wmem_max: 16777216
+  net.ipv4.tcp_rmem: 4096 87380 16777216
+  net.ipv4.tcp_wmem: 4096 65536 16777216
+# Minimize swap file use
+  vm.swappiness: 10
+  vm.dirty_background_ratio: 5
+  vm.dirty_ratio: 10
+# Max open file descriptors 512 * db processes + room for os
+  fs.file-max: 6815744
+# Shorten keep alive of connections
+  net.ipv4.tcp_keepalive_time: 300
+  net.ipv4.tcp_keepalive_intvl: 60
+  net.ipv4.tcp_keepalive_probes: 10
+# maximize port range
+  net.ipv4.ip_local_port_range: 9000 65500
+# Socket send and receive buffer size
+  net.core.rmem_default: 262144
+  net.core.wmem_default: 262144
+# Asynchronous non-blocking I/O 
+  fs.aio-max-nr: 1048576
+
+# Oracle user limits
+oracle_database_limits_soft_no_file: 4096
+oracle_database_limits_hard_no_file: 65536
+oracle_database_limits_soft_nproc: 16384
+oracle_database_limits_hard_nproc: 16384
+oracle_database_limits_soft_stack: 10240
+oracle_database_limits_hard_stack: 32768
+# mem lock 90% of RAM
+oracle_database_limits_soft_memlock: 1887437
+oracle_database_limits_hard_memlock: 1887437
+
+
+artefact_path: "delius-core/oracle/rdbms"
+
+oracledb_artefacts:
+  - name: 'LINUX.X64_180000_db_home.zip'
+
+oraclegrid_artefacts:
+  - name: 'LINUX.X64_193000_grid_home.zip'
+
+oracledb_patches:
+  - name: 'p30783603_180000_Linux-x86-64.zip'
+    dest_path: "{{ oracle_patch_installer_directory }}"
+
+oraclegrid_patches:
+  - name: 'p30899722_190000_Linux-x86-64.zip'
+
+oracledb_post_patches:
+  - name: 'p6880880_180000_Linux-x86-64.zip'
+    dest_path: "{{ oracle_patch_installer_directory }}"
+
+oracledb_rpms:
+  - name: 'oracleasm-support-2.1.11-2.el7.x86_64.rpm'
+  - name: 'oracleasmlib-2.0.12-1.el7.x86_64.rpm'
+  - name: 'oracle-database-preinstall-18c-1.0-1.el7.x86_64.rpm'
+
+oracledb_osbws:
+  - name: 'osbws_install_12.2.0.1.0.jar'
+    dest_path: "{{ oracle_osbws_installer_directory }}"
+
+artifacts_to_clean: "{{ oracledb_artefacts + oracledb_rpms + oracledb_osbws + [{'name': 'p18370031_112040_Linux-x86-64.zip', 'name': 'p27726505_112040_Linux-x86-64.zip'}] }}"
