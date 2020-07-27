@@ -62,7 +62,7 @@
       ],
       "ami_name": "HMPPS OracleDB 18c {{user `branch_name`}} {{timestamp}}",
       "tags": {
-        "OS_Version": "CentOS Linux 7",
+        "OS_Version": "HMPPS OracleDB 18c {{user `branch_name`}} {{timestamp}}",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
         "Name": "HMPPS OracleDB 18c {{user `branch_name`}} {{timestamp}}",
