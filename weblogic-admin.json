@@ -5,7 +5,8 @@
     "env": "{{env `TARGET_ENV`}}",
     "bucket": "{{env `ARTIFACT_BUCKET`}}",
     "wl_bucket": "{{env `ZAIZI_BUCKET` }}",
-    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
+    "codebuild": "{{env `CODEBUILD`}}"
   },
   "provisioners": [
     {
@@ -69,7 +70,18 @@
         "Name": "HMPPS Delius-Core Weblogic-Admin {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer"
+        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer",
+        "Codebuild": "{{user `codebuild`}}"
+      },
+      "run_volume_tags": {
+        "OS_Version": "CentOS Linux 7",
+        "Base_AMI_Name": "{{ .SourceAMIName }}",
+        "Base_AMI_ID": "{{ .SourceAMI }}",
+        "Name": "HMPPS Delius-Core Weblogic-Admin {{user `branch_name`}} {{timestamp}}",
+        "Git_Branch": "{{user `branch_name`}}",
+        "image_tag_version": "{{user `image_tag_version`}}",
+        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer",
+        "Codebuild": "{{user `codebuild`}}"
       },
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
