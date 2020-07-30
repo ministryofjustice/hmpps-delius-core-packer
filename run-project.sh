@@ -51,8 +51,12 @@ function build_image() {
     echo '----------------------------------------------'
     echo "Running packer build for Linux Image ${1}"
     echo '----------------------------------------------'
-   
-    USER=`whoami` packer build ${1}
+    
+    echo 'Get github_access_token from ssm paramstore'
+    github_access_token=`aws ssm get-parameter --name /jenkins/github/accesstoken --with-decryption --output text --query Parameter.Value --region eu-west-2`
+    echo "Running packer build.."
+    USER=`whoami` packer build -var github_access_token=$github_access_token ${1}
+    
     RESULT=$?
 
     echo '----------------------------------------------'
