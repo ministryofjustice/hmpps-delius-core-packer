@@ -1,6 +1,0 @@
----
-
-- hosts: localhost
-  roles:
-    - packages
-    - apacheds

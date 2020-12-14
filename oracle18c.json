@@ -5,20 +5,20 @@
     "env": "{{env `TARGET_ENV`}}",
     "bucket": "{{env `ARTIFACT_BUCKET`}}",
     "wl_bucket": "{{env `ZAIZI_BUCKET` }}",
-    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
-    "codebuild": "{{env `CODEBUILD`}}"
+    "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}"
   },
   "provisioners": [
     {
       "type": "ansible-local",
-      "playbook_file": "./ansible/oracle-client.yml",
+      "playbook_file": "./ansible/oracledb.yml",
       "extra_arguments": [
         "-b",
-        "-e artifact_bucket={{user `wl_bucket`}}",
-        "-e github_access_token={{user `github_access_token`}}"
+        "-e artifact_bucket={{user `bucket`}}",
+        "-e wl_artefact_bucket={{user `wl_bucket`}}",
+        "-e db_version=18c"
       ],
-      "galaxy_file": "./ansible/oracle-client-requirements.yml",
-      "inventory_groups": "oracle-client",
+      "galaxy_file": "./ansible/oracledb-requirements.yml",
+      "inventory_groups": "oracle18c",
       "group_vars": "./ansible/group_vars"
     }
   ],
@@ -60,26 +60,15 @@
         "434401102446",
         "766455809178"
       ],
-      "ami_name": "HMPPS Delius-Core Oracle Client {{user `branch_name`}} {{timestamp}}",
+      "ami_name": "HMPPS OracleDB 18c {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "CentOS Linux 7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Delius-Core Oracle Client {{user `branch_name`}} {{timestamp}}",
+        "Name": "HMPPS OracleDB 18c {{user `branch_name`}} {{timestamp}}",
         "Git_Branch": "{{user `branch_name`}}",
         "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer",
-        "Codebuild": "{{user `codebuild`}}"
-      },
-      "run_volume_tags": {
-        "OS_Version": "CentOS Linux 7",
-        "Base_AMI_Name": "{{ .SourceAMIName }}",
-        "Base_AMI_ID": "{{ .SourceAMI }}",
-        "Name": "HMPPS Delius-Core Oracle Client {{user `branch_name`}} {{timestamp}}",
-        "Git_Branch": "{{user `branch_name`}}",
-        "image_tag_version": "{{user `image_tag_version`}}",
-        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer",
-        "Codebuild": "{{user `codebuild`}}"
+        "source-code": "https://github.com/ministryofjustice/hmpps-delius-core-packer"
       },
       "ssh_interface": "private_ip",
       "vpc_id": "vpc-02321f288159e5d0e",
