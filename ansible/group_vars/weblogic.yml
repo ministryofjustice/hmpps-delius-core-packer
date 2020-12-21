@@ -7,7 +7,7 @@ system:
     - unzip
 
 install_jdk: true
-java_version: 7u261
+java_version: 7u281
 
 mount_point: "/u01"
 device_name: "/dev/xvdb"
