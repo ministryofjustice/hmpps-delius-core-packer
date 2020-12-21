@@ -46,10 +46,10 @@ weblogic_patches:
   - name: "p27238412_1036_Generic"
     command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu/cache_dir && bash bsu_update.sh install"
     creates_file: "bsu_update.sh"
-  # Patch 30463097: WLS PATCH SET UPDATE 10.3.6.0.200114
-  - name: "p30463097_1036_Generic"
-    creates_file: "JWEB.jar"
-    command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=JWEB -prod_dir=${WLS_HOME} -verbose -log=JWEB_patch.log"
+  # Patch 30463097: WLS PATCH SET UPDATE 10.3.6.0.201020
+  - name: "p31641257_1036_Generic"
+    command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=NA7A -prod_dir=${WLS_HOME} -verbose -log=NA7A_patch.log"
+    creates_file: "NA7A.jar"
   # Overlay: FEATURE TO COPY THE WEBLOGIC AUTHENTICATED USER IN THE ORACLE CLIENT ID FIELD
 #  - name: "p11817754_10360200114_Generic"
 #    creates_file: "PZ7S.jar"
