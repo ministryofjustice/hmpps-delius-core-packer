@@ -39,7 +39,7 @@ weblogic_artefacts:
   - name: 'p31641257_1036_Generic.zip'
   - name: 'p11817754_10360200114_Generic.zip'
 
-bsu_mem_args: -Xms3g -Xmx3g
+bsu_mem_args: -Xms1g -Xmx4g
 
 weblogic_patches:
   # Patch 27238412: SMART UPDATE TOOL ENHANCEMENT V3
