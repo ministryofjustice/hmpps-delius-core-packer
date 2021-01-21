@@ -37,7 +37,7 @@ weblogic_artefacts:
   - name: 'wls1036_generic.jar'
   - name: 'p27238412_1036_Generic.zip'
   - name: 'p31641257_1036_Generic.zip'
-  - name: 'p11817754_10360200114_Generic.zip'
+  - name: 'p11817754_10360201020_Generic.zip'
 
 bsu_mem_args: -Xms1g -Xmx4g
 
@@ -51,8 +51,8 @@ weblogic_patches:
     command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=NA7A -prod_dir=${WLS_HOME} -verbose -log=NA7A_patch.log"
     creates_file: "NA7A.jar"
   # Overlay: FEATURE TO COPY THE WEBLOGIC AUTHENTICATED USER IN THE ORACLE CLIENT ID FIELD
-#  - name: "p11817754_10360200114_Generic"
-#    creates_file: "PZ7S.jar"
-#    command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=PZ7S -prod_dir=${WLS_HOME} -verbose -log=PZ7S_patch.log"
+  - name: "p11817754_10360201020_Generic"
+    creates_file: "GNP8.jar"
+    command: ". ~/.bash_profile && . ${WLS_HOME}/server/bin/setWLSEnv.sh > /dev/null 2>&1 && cd ${MW_HOME}/utils/bsu && ./bsu.sh -install -patch_download_dir=${MW_HOME}/utils/bsu/cache_dir -patchlist=GNP8 -prod_dir=${WLS_HOME} -verbose -log=GNP8_patch.log"
 
 nodemgr_port: "5556"
