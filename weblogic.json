@@ -89,7 +89,7 @@
         {
           "device_name": "/dev/xvdb",
           "volume_type": "gp2",
-          "volume_size": 256,
+          "volume_size": 32,
           "delete_on_termination": true,
           "encrypted": false
         }
