@@ -19,8 +19,8 @@
 
     - name: Get sqlplus client packages from S3
       aws_s3:
-        bucket: '{{ artifact_bucket }}'
-        object: /dependencies/oracle/client/{{ item }}
+        bucket: '{{ wl_artefact_bucket }}'
+        object: /delius-core/oracle/client/{{ item }}
         dest: /tmp/{{ item }}
         mode: get
       with_items:
