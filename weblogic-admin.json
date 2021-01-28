@@ -18,7 +18,8 @@
       "type": "ansible-local",
       "playbook_file": "./ansible/weblogic-admin.yml",
       "extra_arguments": [
-        "-b"
+        "-b",
+        "-e wl_artefact_bucket={{user `wl_bucket`}}"
       ],
       "inventory_groups": "weblogic-admin",
       "group_vars": "./ansible/group_vars"

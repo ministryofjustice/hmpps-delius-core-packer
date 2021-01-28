@@ -17,10 +17,32 @@
       become_user: "oracle"
       register: create_domain
 
+    - name: Get sqlplus client packages from S3
+      aws_s3:
+        bucket: '{{ wl_artefact_bucket }}'
+        object: /delius-core/oracle/client/{{ item }}
+        dest: /tmp/{{ item }}
+        mode: get
+      with_items:
+        - oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
+        - oracle-instantclient19.3-sqlplus-19.3.0.0.0-1.x86_64.rpm
+
+    - name: Install sqlplus client
+      become: yes
+      become_user: root
+      yum:
+        name:
+          - libaio
+          - /tmp/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
+          - /tmp/oracle-instantclient19.3-sqlplus-19.3.0.0.0-1.x86_64.rpm
+        state: present
+
   post_tasks:
     - name: Clean Up
       file:
         state: absent
         path: "{{ item }}"
       with_items:
-        - "/tmp/templates"
+        - /tmp/templates
+        - /tmp/oracle-instantclient19.3-basic-19.3.0.0.0-1.x86_64.rpm
+        - /tmp/oracle-instantclient19.3-sqlplus-19.3.0.0.0-1.x86_64.rpm
