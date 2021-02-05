@@ -171,6 +171,7 @@ oracle_database_limits_soft_nproc: 16384
 oracle_database_limits_hard_nproc: 16384
 oracle_database_limits_soft_stack: 10240
 oracle_database_limits_hard_stack: 32768
+oracle_database_limits_hard_core: unlimited
 # mem lock 90% of RAM
 oracle_database_limits_soft_memlock: 1887437
 oracle_database_limits_hard_memlock: 1887437
