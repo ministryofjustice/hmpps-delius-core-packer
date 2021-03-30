@@ -6,7 +6,8 @@
     "bucket": "{{env `ARTIFACT_BUCKET`}}",
     "wl_bucket": "{{env `ZAIZI_BUCKET` }}",
     "image_tag_version": "{{env `IMAGE_TAG_VERSION`}}",
-    "codebuild": "{{env `CODEBUILD`}}"
+    "codebuild": "{{env `CODEBUILD`}}",
+    "ami_users": "{{env `AMI_USERS` }}"
   },
   "provisioners": [
     {
@@ -40,26 +41,7 @@
       "instance_type": "t2.medium",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
-      "ami_users": [
-        "563502482979",
-        "723123699647",
-        "895523100917",
-        "077643444046",
-        "431912413968",
-        "645753425509",
-        "479759138745",
-        "349354156492",
-        "130975965028",
-        "716683748953",
-        "010587221707",
-        "050243167760",
-        "205048117103",
-        "728765553488",
-        "330914586320",
-        "130847504577",
-        "434401102446",
-        "766455809178"
-      ],
+      "ami_users": "{{user `ami_users`}",
       "ami_name": "HMPPS Delius-Core OracleDB {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "CentOS Linux 7",
