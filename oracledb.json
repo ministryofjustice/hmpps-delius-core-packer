@@ -41,7 +41,7 @@
       "instance_type": "t2.medium",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
-      "ami_users": "{{user `ami_users`}",
+      "ami_users": "{{user `ami_users`}}",
       "ami_name": "HMPPS Delius-Core OracleDB {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "CentOS Linux 7",
