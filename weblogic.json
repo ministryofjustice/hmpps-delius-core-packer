@@ -41,7 +41,7 @@
       "instance_type": "t3.large",
       "ami_regions": ["eu-west-2"],
       "ssh_username": "centos",
-      "ami_users": "{{user `ami_users`}}",
+      "ami_users": ["{{user `ami_users`}}"],
       "ami_name": "HMPPS Delius-Core Weblogic {{user `branch_name`}} {{timestamp}}",
       "tags": {
         "OS_Version": "CentOS Linux 7",
