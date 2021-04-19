@@ -185,8 +185,9 @@ oracledb_artefacts:
 oraclegrid_artefacts:
   - name: LINUX.X64_193000_grid_home.zip
 
+# Oracle 19.9 DBRU
 oracledb_patches:
-  - name: 'p31326362_190000_Linux-x86-64.zip'
+  - name: 'p31720396_190000_Linux-x86-64.zip'
     dest_path: "{{ oracle_patch_installer_directory }}"
 
 oraclegrid_patches:
